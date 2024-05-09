@@ -1,0 +1,127 @@
+---
+# title: "Mesa de Procesamiento REP"
+# author: "Febrero 2024"
+format:
+  revealjs:
+    auto-stretch: false
+    margin: 0
+    slide-number: true
+    scrollable: true
+    preview-links: auto
+    logo: imagenes/logo_portada2.png
+    css: ine_quarto_styles.css
+    # footer: https://quarto.org
+---
+
+# 
+
+```{=html}
+<!---
+# TODO: this does not work
+.linea-superior[]
+.linea-inferior[] 
+--->
+```
+```{=html}
+<!---
+# TODO: this does not work
+![](imagenes/logo_portada2.png){.center style="width: 20%;"}   
+--->
+```
+
+```{=html}
+<!---
+<img src="imagenes/logo_portada2.png" style="width: 20%"/>  
+--->
+```
+<img src="imagenes/logo_portada2.png" width="20%"/>
+
+[**Capacitación en R y herramientas de productividad**]{.big-par .center-justified}
+
+[**Nivel básico**]{.big-par .center-justified}
+
+[**Mayo 2024**]{.big-par .center-justified}
+
+## Contenidos
+::: {.incremental .small-par}
+- Estructuración de tablas: pivot_longer
+- Estructuración de tablas: pivot_wider
+- Unión de tablas
+- Visualización de datos con ggplot
+:::
+
+## Estructuración de tablas: pivot_longer
+
+::: {.incremental .small-par}
+- En ocasiones necesitamos transformar el formato de nuestros dataframes, desde **wide** a **long**, o viceversa.
+- Un dataframe en formato **wide** (ancho) es un tipo de organización de datos en el que cada fila representa un único caso o entidad, y las columnas contienen múltiples variables.
+- Es común cuando las variables son medidas en diferentes momentos o categorías, como en series temporales.
+:::
+. . .
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+ventas_wide <- data.frame(producto = c("A", "B", "C"),
+                     `2018` = c(100, 150, 200),
+                     `2019` = c(120, 180, 220),
+                     `2020` = c(130, 160, 210),
+                     check.names=FALSE)
+
+```
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+
+ventas_wide
+```
+
+::: notes
+- Un dataframe en formato ancho contiene valores que no se repiten en la primera columna, como en este ejemplo donde cada fila representa un producto y las columnas contienen los años de las ventas en tres productos diferentes (A, B y C).
+- Este es un ejemplo de un DataFrame en formato wide porque las variables están dispuestas en columnas separadas.
+:::
+
+## Estructuración de tablas: pivot_longer
+
+::: {.incremental .small-par}
+- Un dataframe en formato **long** (largo) contiene valores que si se repiten en la primera columna y hay una columna adicional que identifica la variable a la que corresponde cada observación.
+es un tipo de organización de datos en el que cada fila representa una observación única y cada variable tiene su propia columna. En otras palabras, hay una sola columna para todas las observaciones de una variable y una columna adicional que identifica la variable.
+- Es común cuando se quiere facilitar el manejo y análisis de datos, especialmente para operaciones como agregaciones, visualizaciones y análisis estadísticos.
+:::
+. . .
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+library(dplyr)
+library(tidyr)
+ventas_long <- data.frame(producto = c("A", "B", "C"),
+                     `2018` = c(100, 150, 200),
+                     `2019` = c(120, 180, 220),
+                     `2020` = c(130, 160, 210),
+                     check.names=FALSE) %>% 
+  pivot_longer(cols = -producto, names_to = "anio", values_to = "ventas")
+
+```
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+
+ventas_long
+```
+::: notes
+- En este ejemplo, vemos que cada fila representa una observación única, en este caso las ventas de un producto en un año específico. Las columnas son Producto, Año y Ventas. 
+- En el formato long, hay una sola columna para las ventas, y otra columna (Año) que identifica el año correspondiente a cada observación.
+:::
+
+## Estructuración de tablas: pivot_longer
+::: {.incremental .small-par}
+- Veamos un ejemplo usando pivot_longer:
+:::
+
+
+
+
+
+
+
