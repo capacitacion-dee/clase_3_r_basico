@@ -799,32 +799,7 @@
 <section id="unión-de-tablas-left_join" class="slide level2">
 <h2>Unión de tablas: left_join</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">id =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
-<span id="cb18-2"><a href="#cb18-2"></a>                  <span class="at">nombre =</span> <span class="fu">c</span>(<span class="st">"Juan"</span>, <span class="st">"María"</span>, <span class="st">"Pedro"</span>, <span class="st">"Ana"</span>),</span>
-<span id="cb18-3"><a href="#cb18-3"></a>                  <span class="at">edad =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">28</span>, <span class="dv">35</span>))</span>
-<span id="cb18-4"><a href="#cb18-4"></a>df1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  id nombre edad
-1  1   Juan   25
-2  2  María   30
-3  3  Pedro   28
-4  4    Ana   35</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">id =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>),</span>
-<span id="cb20-2"><a href="#cb20-2"></a>                  <span class="at">departamento =</span> <span class="fu">c</span>(<span class="st">"Ventas"</span>, <span class="st">"Marketing"</span>, <span class="st">"Recursos Humanos"</span>))</span>
-<span id="cb20-3"><a href="#cb20-3"></a>df2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  id     departamento
-1  1           Ventas
-2  2        Marketing
-3  5 Recursos Humanos</code></pre>
-</div>
-</div>
-</section>
-<section id="unión-de-tablas-left_join-1" class="slide level2">
-<h2>Unión de tablas: left_join</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>band_members</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>band_members</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
   name  band   
@@ -833,7 +808,7 @@
 2 John  Beatles
 3 Paul  Beatles</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>band_instruments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>band_instruments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
   name  plays 
@@ -842,7 +817,44 @@
 2 Paul  bass  
 3 Keith guitar</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>band_members <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(band_instruments, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"name"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>band_members <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(band_instruments, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"name"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  name  band    plays 
+  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; 
+1 Mick  Stones  &lt;NA&gt;  
+2 John  Beatles guitar
+3 Paul  Beatles bass  </code></pre>
+</div>
+</div>
+</section>
+<section id="unión-de-tablas-left_join-1" class="slide level2">
+<h2>Unión de tablas: left_join</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Qué pasa si el nombre de las columnas identificadoras no son iguales?</li>
+</ul>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>band_members</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  name  band   
+  &lt;chr&gt; &lt;chr&gt;  
+1 Mick  Stones 
+2 John  Beatles
+3 Paul  Beatles</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>band_instruments2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  artist plays 
+  &lt;chr&gt;  &lt;chr&gt; 
+1 John   guitar
+2 Paul   bass  
+3 Keith  guitar</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>band_members <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(band_instruments2, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"name"</span><span class="ot">=</span><span class="st">"artist"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 3
   name  band    plays 
@@ -857,52 +869,15 @@
 <h2>Unión de tablas: left_join</h2>
 <div class="small-par">
 <ul>
-<li class="fragment">Qué pasa si el nombre de las columnas identificadoras no son iguales?</li>
-</ul>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>band_members</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 2
-  name  band   
-  &lt;chr&gt; &lt;chr&gt;  
-1 Mick  Stones 
-2 John  Beatles
-3 Paul  Beatles</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>band_instruments2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 2
-  artist plays 
-  &lt;chr&gt;  &lt;chr&gt; 
-1 John   guitar
-2 Paul   bass  
-3 Keith  guitar</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>band_members <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(band_instruments2, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"name"</span><span class="ot">=</span><span class="st">"artist"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 3
-  name  band    plays 
-  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; 
-1 Mick  Stones  &lt;NA&gt;  
-2 John  Beatles guitar
-3 Paul  Beatles bass  </code></pre>
-</div>
-</div>
-</section>
-<section id="unión-de-tablas-left_join-3" class="slide level2">
-<h2>Unión de tablas: left_join</h2>
-<div class="small-par">
-<ul>
 <li class="fragment">Qué pasa si necesitamos más de una variable identificadora?</li>
 </ul>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># Conjunto de datos de ventas</span></span>
-<span id="cb34-2"><a href="#cb34-2"></a>ventas <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">vendedor =</span> <span class="fu">c</span>(<span class="st">"Juan"</span>, <span class="st">"María"</span>, <span class="st">"Juan"</span>, <span class="st">"Pedro"</span>, <span class="st">"María"</span>, <span class="st">"Pedro"</span>),</span>
-<span id="cb34-3"><a href="#cb34-3"></a>                     <span class="at">departamento =</span> <span class="fu">c</span>(<span class="st">"Ventas"</span>, <span class="st">"Marketing"</span>, <span class="st">"Ventas"</span>, <span class="st">"Ventas"</span>, <span class="st">"Marketing"</span>, <span class="st">"Ventas"</span>),</span>
-<span id="cb34-4"><a href="#cb34-4"></a>                     <span class="at">ventas =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">150</span>, <span class="dv">200</span>, <span class="dv">120</span>, <span class="dv">180</span>, <span class="dv">160</span>))</span>
-<span id="cb34-5"><a href="#cb34-5"></a>ventas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># Conjunto de datos de ventas</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a>ventas <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">vendedor =</span> <span class="fu">c</span>(<span class="st">"Juan"</span>, <span class="st">"María"</span>, <span class="st">"Juan"</span>, <span class="st">"Pedro"</span>, <span class="st">"María"</span>, <span class="st">"Pedro"</span>),</span>
+<span id="cb30-3"><a href="#cb30-3"></a>                     <span class="at">departamento =</span> <span class="fu">c</span>(<span class="st">"Ventas"</span>, <span class="st">"Marketing"</span>, <span class="st">"Ventas"</span>, <span class="st">"Ventas"</span>, <span class="st">"Marketing"</span>, <span class="st">"Ventas"</span>),</span>
+<span id="cb30-4"><a href="#cb30-4"></a>                     <span class="at">ventas =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">150</span>, <span class="dv">200</span>, <span class="dv">120</span>, <span class="dv">180</span>, <span class="dv">160</span>))</span>
+<span id="cb30-5"><a href="#cb30-5"></a>ventas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  vendedor departamento ventas
 1     Juan       Ventas    100
@@ -912,11 +887,11 @@
 5    María    Marketing    180
 6    Pedro       Ventas    160</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="co"># Conjunto de datos de vendedores</span></span>
-<span id="cb36-2"><a href="#cb36-2"></a>vendedores <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">vendedor =</span> <span class="fu">c</span>(<span class="st">"Juan"</span>, <span class="st">"María"</span>, <span class="st">"Pedro"</span>),</span>
-<span id="cb36-3"><a href="#cb36-3"></a>                         <span class="at">departamento =</span> <span class="fu">c</span>(<span class="st">"Ventas"</span>, <span class="st">"Marketing"</span>, <span class="st">"Ventas"</span>),</span>
-<span id="cb36-4"><a href="#cb36-4"></a>                         <span class="at">experiencia =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">3</span>))</span>
-<span id="cb36-5"><a href="#cb36-5"></a>vendedores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># Conjunto de datos de vendedores</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>vendedores <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">vendedor =</span> <span class="fu">c</span>(<span class="st">"Juan"</span>, <span class="st">"María"</span>, <span class="st">"Pedro"</span>),</span>
+<span id="cb32-3"><a href="#cb32-3"></a>                         <span class="at">departamento =</span> <span class="fu">c</span>(<span class="st">"Ventas"</span>, <span class="st">"Marketing"</span>, <span class="st">"Ventas"</span>),</span>
+<span id="cb32-4"><a href="#cb32-4"></a>                         <span class="at">experiencia =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">3</span>))</span>
+<span id="cb32-5"><a href="#cb32-5"></a>vendedores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  vendedor departamento experiencia
 1     Juan       Ventas           5
@@ -943,7 +918,7 @@
           display:block!important;
       }</style></aside>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>ventas <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(vendedores, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"vendedor"</span>,<span class="st">"departamento"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>ventas <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(vendedores, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"vendedor"</span>,<span class="st">"departamento"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  vendedor departamento ventas experiencia
 1     Juan       Ventas    100           5
@@ -958,7 +933,7 @@
 <section id="unión-de-tablas-right_join" class="slide level2">
 <h2>Unión de tablas: right_join</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>band_members</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>band_members</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
   name  band   
@@ -967,7 +942,7 @@
 2 John  Beatles
 3 Paul  Beatles</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>band_instruments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>band_instruments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
   name  plays 
@@ -976,7 +951,7 @@
 2 Paul  bass  
 3 Keith guitar</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a>band_members <span class="sc">%&gt;%</span> <span class="fu">right_join</span>(band_instruments, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"name"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>band_members <span class="sc">%&gt;%</span> <span class="fu">right_join</span>(band_instruments, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"name"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 3
   name  band    plays 
@@ -990,7 +965,7 @@
 <section id="unión-de-tablas-full_join" class="slide level2">
 <h2>Unión de tablas: full_join</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>band_members</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>band_members</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
   name  band   
@@ -999,7 +974,7 @@
 2 John  Beatles
 3 Paul  Beatles</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a>band_instruments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a>band_instruments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
   name  plays 
@@ -1008,7 +983,7 @@
 2 Paul  bass  
 3 Keith guitar</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a>band_members <span class="sc">%&gt;%</span> <span class="fu">full_join</span>(band_instruments, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"name"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>band_members <span class="sc">%&gt;%</span> <span class="fu">full_join</span>(band_instruments, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"name"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 3
   name  band    plays 
@@ -1023,7 +998,7 @@
 <section id="unión-de-tablas-anti_join" class="slide level2">
 <h2>Unión de tablas: anti_join</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a>band_members</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a>band_members</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
   name  band   
@@ -1032,7 +1007,7 @@
 2 John  Beatles
 3 Paul  Beatles</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a>band_instruments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a>band_instruments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
   name  plays 
@@ -1041,7 +1016,7 @@
 2 Paul  bass  
 3 Keith guitar</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a>band_members <span class="sc">%&gt;%</span> <span class="fu">anti_join</span>(band_instruments, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"name"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a>band_members <span class="sc">%&gt;%</span> <span class="fu">anti_join</span>(band_instruments, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"name"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
   name  band  
@@ -1090,8 +1065,8 @@
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a><span class="co">#install.packages("nycflights13")</span></span>
-<span id="cb58-2"><a href="#cb58-2"></a><span class="fu">library</span>(nycflights13)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="co">#install.packages("nycflights13")</span></span>
+<span id="cb54-2"><a href="#cb54-2"></a><span class="fu">library</span>(nycflights13)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
@@ -1104,9 +1079,9 @@
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a>flights2 <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span> </span>
-<span id="cb59-2"><a href="#cb59-2"></a>  <span class="fu">select</span>(time_hour, origin, dest, tailnum, carrier)</span>
-<span id="cb59-3"><a href="#cb59-3"></a>flights2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a>flights2 <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span> </span>
+<span id="cb55-2"><a href="#cb55-2"></a>  <span class="fu">select</span>(time_hour, origin, dest, tailnum, carrier)</span>
+<span id="cb55-3"><a href="#cb55-3"></a>flights2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 336,776 × 5
    time_hour           origin dest  tailnum carrier
@@ -1135,8 +1110,8 @@
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a>flights2 <span class="sc">%&gt;%</span> </span>
-<span id="cb61-2"><a href="#cb61-2"></a>  <span class="fu">left_join</span>(airlines, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"carrier"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a>flights2 <span class="sc">%&gt;%</span> </span>
+<span id="cb57-2"><a href="#cb57-2"></a>  <span class="fu">left_join</span>(airlines, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"carrier"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 336,776 × 6
    time_hour           origin dest  tailnum carrier name                    
@@ -1165,8 +1140,8 @@
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a>flights2 <span class="sc">%&gt;%</span> </span>
-<span id="cb63-2"><a href="#cb63-2"></a>  <span class="fu">left_join</span>(planes, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"tailnum"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a>flights2 <span class="sc">%&gt;%</span> </span>
+<span id="cb59-2"><a href="#cb59-2"></a>  <span class="fu">left_join</span>(planes, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"tailnum"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 336,776 × 13
    time_hour           origin dest  tailnum carrier  year type      manufacturer
@@ -1212,8 +1187,8 @@
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a>flights2 <span class="sc">%&gt;%</span> </span>
-<span id="cb65-2"><a href="#cb65-2"></a>  <span class="fu">left_join</span>(weather, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"time_hour"</span>, <span class="st">"origin"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a>flights2 <span class="sc">%&gt;%</span> </span>
+<span id="cb61-2"><a href="#cb61-2"></a>  <span class="fu">left_join</span>(weather, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"time_hour"</span>, <span class="st">"origin"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 336,776 × 18
    time_hour           origin dest  tailnum carrier  year month   day  hour
@@ -1245,8 +1220,8 @@
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a>flights2 <span class="sc">%&gt;%</span> </span>
-<span id="cb67-2"><a href="#cb67-2"></a>  <span class="fu">anti_join</span>(planes, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"tailnum"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a>flights2 <span class="sc">%&gt;%</span> </span>
+<span id="cb63-2"><a href="#cb63-2"></a>  <span class="fu">anti_join</span>(planes, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"tailnum"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 52,606 × 5
    time_hour           origin dest  tailnum carrier
@@ -1328,8 +1303,8 @@
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a>gapminder <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/gapminder.xlsx"</span>)</span>
-<span id="cb69-2"><a href="#cb69-2"></a><span class="fu">summary</span>(gapminder)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a>gapminder <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/gapminder.xlsx"</span>)</span>
+<span id="cb65-2"><a href="#cb65-2"></a><span class="fu">summary</span>(gapminder)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   country           continent              year         lifeExp     
  Length:1704        Length:1704        Min.   :1952   Min.   :23.60  
@@ -1352,15 +1327,15 @@
 <section id="visualización-de-datos-con-ggplot-2" class="slide level2">
 <h2>Visualización de datos con ggplot</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a><span class="co">#install.packages("ggplot2")</span></span>
-<span id="cb71-2"><a href="#cb71-2"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb71-3"><a href="#cb71-3"></a>gapminder <span class="sc">%&gt;%</span> </span>
-<span id="cb71-4"><a href="#cb71-4"></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">2007</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb71-5"><a href="#cb71-5"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb71-6"><a href="#cb71-6"></a>  <span class="fu">aes</span>(<span class="at">x =</span> continent) <span class="sc">+</span></span>
-<span id="cb71-7"><a href="#cb71-7"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a><span class="co">#install.packages("ggplot2")</span></span>
+<span id="cb67-2"><a href="#cb67-2"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb67-3"><a href="#cb67-3"></a>gapminder <span class="sc">%&gt;%</span> </span>
+<span id="cb67-4"><a href="#cb67-4"></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">2007</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb67-5"><a href="#cb67-5"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb67-6"><a href="#cb67-6"></a>  <span class="fu">aes</span>(<span class="at">x =</span> continent) <span class="sc">+</span></span>
+<span id="cb67-7"><a href="#cb67-7"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-28-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-27-1.png" width="960"></p>
 </div>
 </div>
 <aside class="notes">
@@ -1394,15 +1369,15 @@
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a>gapminder <span class="sc">%&gt;%</span> </span>
-<span id="cb72-2"><a href="#cb72-2"></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">2007</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb72-3"><a href="#cb72-3"></a>  <span class="fu">group_by</span>(continent) <span class="sc">%&gt;%</span> </span>
-<span id="cb72-4"><a href="#cb72-4"></a>  <span class="fu">summarise</span>(<span class="at">gdpPercap_prom =</span> <span class="fu">mean</span>(gdpPercap)) <span class="sc">%&gt;%</span> </span>
-<span id="cb72-5"><a href="#cb72-5"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb72-6"><a href="#cb72-6"></a>  <span class="fu">aes</span>(<span class="at">x =</span> continent, <span class="at">y =</span> gdpPercap_prom) <span class="sc">+</span></span>
-<span id="cb72-7"><a href="#cb72-7"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a>gapminder <span class="sc">%&gt;%</span> </span>
+<span id="cb68-2"><a href="#cb68-2"></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">2007</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb68-3"><a href="#cb68-3"></a>  <span class="fu">group_by</span>(continent) <span class="sc">%&gt;%</span> </span>
+<span id="cb68-4"><a href="#cb68-4"></a>  <span class="fu">summarise</span>(<span class="at">gdpPercap_prom =</span> <span class="fu">mean</span>(gdpPercap)) <span class="sc">%&gt;%</span> </span>
+<span id="cb68-5"><a href="#cb68-5"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb68-6"><a href="#cb68-6"></a>  <span class="fu">aes</span>(<span class="at">x =</span> continent, <span class="at">y =</span> gdpPercap_prom) <span class="sc">+</span></span>
+<span id="cb68-7"><a href="#cb68-7"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-29-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-28-1.png" width="960"></p>
 </div>
 </div>
 <aside class="notes">
@@ -1435,18 +1410,18 @@
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1"></a>gapminder <span class="sc">%&gt;%</span> </span>
-<span id="cb73-2"><a href="#cb73-2"></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">2007</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb73-3"><a href="#cb73-3"></a>  <span class="fu">group_by</span>(continent) <span class="sc">%&gt;%</span> </span>
-<span id="cb73-4"><a href="#cb73-4"></a>  <span class="fu">summarise</span>(<span class="at">gdpPercap_prom =</span> <span class="fu">mean</span>(gdpPercap)) <span class="sc">%&gt;%</span> </span>
-<span id="cb73-5"><a href="#cb73-5"></a>  <span class="fu">mutate</span>(<span class="at">gdpPercap_prom =</span> <span class="fu">round</span>(gdpPercap_prom, <span class="dv">0</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb73-6"><a href="#cb73-6"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb73-7"><a href="#cb73-7"></a>  <span class="fu">aes</span>(<span class="at">x =</span> continent, <span class="at">y =</span> gdpPercap_prom, <span class="at">label =</span> gdpPercap_prom) <span class="sc">+</span></span>
-<span id="cb73-8"><a href="#cb73-8"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
-<span id="cb73-9"><a href="#cb73-9"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Continente"</span>, <span class="at">y =</span> <span class="st">"PIB per cápita promedio"</span>, <span class="at">title =</span> <span class="st">"PIB per cápita promedio por continente (2017)"</span>) <span class="sc">+</span></span>
-<span id="cb73-10"><a href="#cb73-10"></a>  <span class="fu">geom_label</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a>gapminder <span class="sc">%&gt;%</span> </span>
+<span id="cb69-2"><a href="#cb69-2"></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">2007</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb69-3"><a href="#cb69-3"></a>  <span class="fu">group_by</span>(continent) <span class="sc">%&gt;%</span> </span>
+<span id="cb69-4"><a href="#cb69-4"></a>  <span class="fu">summarise</span>(<span class="at">gdpPercap_prom =</span> <span class="fu">mean</span>(gdpPercap)) <span class="sc">%&gt;%</span> </span>
+<span id="cb69-5"><a href="#cb69-5"></a>  <span class="fu">mutate</span>(<span class="at">gdpPercap_prom =</span> <span class="fu">round</span>(gdpPercap_prom, <span class="dv">0</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb69-6"><a href="#cb69-6"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb69-7"><a href="#cb69-7"></a>  <span class="fu">aes</span>(<span class="at">x =</span> continent, <span class="at">y =</span> gdpPercap_prom, <span class="at">label =</span> gdpPercap_prom) <span class="sc">+</span></span>
+<span id="cb69-8"><a href="#cb69-8"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb69-9"><a href="#cb69-9"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Continente"</span>, <span class="at">y =</span> <span class="st">"PIB per cápita promedio"</span>, <span class="at">title =</span> <span class="st">"PIB per cápita promedio por continente (2017)"</span>) <span class="sc">+</span></span>
+<span id="cb69-10"><a href="#cb69-10"></a>  <span class="fu">geom_label</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-30-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-29-1.png" width="960"></p>
 </div>
 </div>
 <aside class="notes">
@@ -1479,17 +1454,17 @@
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a>gapminder <span class="sc">%&gt;%</span> </span>
-<span id="cb74-2"><a href="#cb74-2"></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">1997</span> <span class="sc">|</span> year<span class="sc">==</span><span class="dv">2007</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb74-3"><a href="#cb74-3"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Chile"</span>, <span class="st">"Argentina"</span>, <span class="st">"Bolivia"</span>, <span class="st">"Brazil"</span>, <span class="st">"Colombia"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb74-4"><a href="#cb74-4"></a>  <span class="fu">mutate</span>(<span class="at">pop =</span> pop<span class="sc">/</span><span class="dv">1000</span>,</span>
-<span id="cb74-5"><a href="#cb74-5"></a>         <span class="at">year =</span> <span class="fu">as.factor</span>(year)) <span class="sc">%&gt;%</span> </span>
-<span id="cb74-6"><a href="#cb74-6"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb74-7"><a href="#cb74-7"></a>  <span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">y =</span> pop, <span class="at">fill =</span> year) <span class="sc">+</span></span>
-<span id="cb74-8"><a href="#cb74-8"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
-<span id="cb74-9"><a href="#cb74-9"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"País"</span>, <span class="at">y =</span> <span class="st">"Población (en miles)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a>gapminder <span class="sc">%&gt;%</span> </span>
+<span id="cb70-2"><a href="#cb70-2"></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">1997</span> <span class="sc">|</span> year<span class="sc">==</span><span class="dv">2007</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb70-3"><a href="#cb70-3"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Chile"</span>, <span class="st">"Argentina"</span>, <span class="st">"Bolivia"</span>, <span class="st">"Brazil"</span>, <span class="st">"Colombia"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb70-4"><a href="#cb70-4"></a>  <span class="fu">mutate</span>(<span class="at">pop =</span> pop<span class="sc">/</span><span class="dv">1000</span>,</span>
+<span id="cb70-5"><a href="#cb70-5"></a>         <span class="at">year =</span> <span class="fu">as.factor</span>(year)) <span class="sc">%&gt;%</span> </span>
+<span id="cb70-6"><a href="#cb70-6"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb70-7"><a href="#cb70-7"></a>  <span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">y =</span> pop, <span class="at">fill =</span> year) <span class="sc">+</span></span>
+<span id="cb70-8"><a href="#cb70-8"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb70-9"><a href="#cb70-9"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"País"</span>, <span class="at">y =</span> <span class="st">"Población (en miles)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-31-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-30-1.png" width="960"></p>
 </div>
 </div>
 <aside class="notes">
@@ -1521,13 +1496,13 @@
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a>gapminder <span class="sc">%&gt;%</span></span>
-<span id="cb75-2"><a href="#cb75-2"></a>  <span class="fu">group_by</span>(continent, year) <span class="sc">%&gt;%</span></span>
-<span id="cb75-3"><a href="#cb75-3"></a>  <span class="fu">summarise</span>(<span class="at">lifeExp_prom =</span> <span class="fu">mean</span>(lifeExp)) <span class="sc">%&gt;%</span></span>
-<span id="cb75-4"><a href="#cb75-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>lifeExp_prom, <span class="at">color=</span>continent)) <span class="sc">+</span></span>
-<span id="cb75-5"><a href="#cb75-5"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a>gapminder <span class="sc">%&gt;%</span></span>
+<span id="cb71-2"><a href="#cb71-2"></a>  <span class="fu">group_by</span>(continent, year) <span class="sc">%&gt;%</span></span>
+<span id="cb71-3"><a href="#cb71-3"></a>  <span class="fu">summarise</span>(<span class="at">lifeExp_prom =</span> <span class="fu">mean</span>(lifeExp)) <span class="sc">%&gt;%</span></span>
+<span id="cb71-4"><a href="#cb71-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>lifeExp_prom, <span class="at">color=</span>continent)) <span class="sc">+</span></span>
+<span id="cb71-5"><a href="#cb71-5"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-32-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-31-1.png" width="960"></p>
 </div>
 </div>
 <aside class="notes">
@@ -1560,12 +1535,12 @@
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1"></a>gapminder <span class="sc">%&gt;%</span> </span>
-<span id="cb76-2"><a href="#cb76-2"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb76-3"><a href="#cb76-3"></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(gdpPercap), <span class="at">y =</span> lifeExp) <span class="sc">+</span></span>
-<span id="cb76-4"><a href="#cb76-4"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a>gapminder <span class="sc">%&gt;%</span> </span>
+<span id="cb72-2"><a href="#cb72-2"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb72-3"><a href="#cb72-3"></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(gdpPercap), <span class="at">y =</span> lifeExp) <span class="sc">+</span></span>
+<span id="cb72-4"><a href="#cb72-4"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-33-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-32-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1579,13 +1554,13 @@
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1"></a>gapminder <span class="sc">%&gt;%</span> </span>
-<span id="cb77-2"><a href="#cb77-2"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2007</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb77-3"><a href="#cb77-3"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb77-4"><a href="#cb77-4"></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(gdpPercap), <span class="at">y =</span> lifeExp, <span class="at">color=</span>continent) <span class="sc">+</span></span>
-<span id="cb77-5"><a href="#cb77-5"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1"></a>gapminder <span class="sc">%&gt;%</span> </span>
+<span id="cb73-2"><a href="#cb73-2"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2007</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb73-3"><a href="#cb73-3"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb73-4"><a href="#cb73-4"></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(gdpPercap), <span class="at">y =</span> lifeExp, <span class="at">color=</span>continent) <span class="sc">+</span></span>
+<span id="cb73-5"><a href="#cb73-5"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-34-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-33-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1599,13 +1574,13 @@
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1"></a>gapminder <span class="sc">%&gt;%</span> </span>
-<span id="cb78-2"><a href="#cb78-2"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb78-3"><a href="#cb78-3"></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(gdpPercap), <span class="at">y =</span> lifeExp, <span class="at">color=</span>continent) <span class="sc">+</span></span>
-<span id="cb78-4"><a href="#cb78-4"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb78-5"><a href="#cb78-5"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>continent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a>gapminder <span class="sc">%&gt;%</span> </span>
+<span id="cb74-2"><a href="#cb74-2"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb74-3"><a href="#cb74-3"></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(gdpPercap), <span class="at">y =</span> lifeExp, <span class="at">color=</span>continent) <span class="sc">+</span></span>
+<span id="cb74-4"><a href="#cb74-4"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb74-5"><a href="#cb74-5"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>continent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-35-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-34-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1626,7 +1601,7 @@
 <h2>Ejercicio 3</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-36-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-35-1.png" width="960"></p>
 </div>
 </div>
 </section>
@@ -1639,8 +1614,8 @@
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb79-2"><a href="#cb79-2"></a>vuelos <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/vuelos.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb75-2"><a href="#cb75-2"></a>vuelos <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/vuelos.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
@@ -1653,12 +1628,12 @@
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1"></a>vuelos <span class="sc">%&gt;%</span> </span>
-<span id="cb80-2"><a href="#cb80-2"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb80-3"><a href="#cb80-3"></a>  <span class="fu">aes</span>(<span class="at">x =</span> aerolinea) <span class="sc">+</span></span>
-<span id="cb80-4"><a href="#cb80-4"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1"></a>vuelos <span class="sc">%&gt;%</span> </span>
+<span id="cb76-2"><a href="#cb76-2"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb76-3"><a href="#cb76-3"></a>  <span class="fu">aes</span>(<span class="at">x =</span> aerolinea) <span class="sc">+</span></span>
+<span id="cb76-4"><a href="#cb76-4"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-38-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-37-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1672,14 +1647,14 @@
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1"></a>vuelos <span class="sc">%&gt;%</span> </span>
-<span id="cb81-2"><a href="#cb81-2"></a>  <span class="fu">group_by</span>(aerolinea) <span class="sc">%&gt;%</span> </span>
-<span id="cb81-3"><a href="#cb81-3"></a>  <span class="fu">summarise</span>(<span class="at">dist_prom =</span> <span class="fu">mean</span>(distancia, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb81-4"><a href="#cb81-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb81-5"><a href="#cb81-5"></a>  <span class="fu">aes</span>(<span class="at">x =</span> aerolinea, <span class="at">y =</span> dist_prom) <span class="sc">+</span></span>
-<span id="cb81-6"><a href="#cb81-6"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1"></a>vuelos <span class="sc">%&gt;%</span> </span>
+<span id="cb77-2"><a href="#cb77-2"></a>  <span class="fu">group_by</span>(aerolinea) <span class="sc">%&gt;%</span> </span>
+<span id="cb77-3"><a href="#cb77-3"></a>  <span class="fu">summarise</span>(<span class="at">dist_prom =</span> <span class="fu">mean</span>(distancia, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb77-4"><a href="#cb77-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb77-5"><a href="#cb77-5"></a>  <span class="fu">aes</span>(<span class="at">x =</span> aerolinea, <span class="at">y =</span> dist_prom) <span class="sc">+</span></span>
+<span id="cb77-6"><a href="#cb77-6"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-39-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-38-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1693,14 +1668,14 @@
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1"></a>vuelos <span class="sc">%&gt;%</span> </span>
-<span id="cb82-2"><a href="#cb82-2"></a>  <span class="fu">group_by</span>(mes, origen) <span class="sc">%&gt;%</span> </span>
-<span id="cb82-3"><a href="#cb82-3"></a>  <span class="fu">summarise</span>(<span class="at">tiempo_prom =</span> <span class="fu">mean</span>(tiempo_vuelo, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb82-4"><a href="#cb82-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb82-5"><a href="#cb82-5"></a>  <span class="fu">aes</span>(<span class="at">x =</span> mes, <span class="at">y =</span> tiempo_prom, <span class="at">color =</span> origen) <span class="sc">+</span></span>
-<span id="cb82-6"><a href="#cb82-6"></a>  <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1"></a>vuelos <span class="sc">%&gt;%</span> </span>
+<span id="cb78-2"><a href="#cb78-2"></a>  <span class="fu">group_by</span>(mes, origen) <span class="sc">%&gt;%</span> </span>
+<span id="cb78-3"><a href="#cb78-3"></a>  <span class="fu">summarise</span>(<span class="at">tiempo_prom =</span> <span class="fu">mean</span>(tiempo_vuelo, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb78-4"><a href="#cb78-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb78-5"><a href="#cb78-5"></a>  <span class="fu">aes</span>(<span class="at">x =</span> mes, <span class="at">y =</span> tiempo_prom, <span class="at">color =</span> origen) <span class="sc">+</span></span>
+<span id="cb78-6"><a href="#cb78-6"></a>  <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-40-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-39-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1714,14 +1689,14 @@
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1"></a>vuelos <span class="sc">%&gt;%</span> </span>
-<span id="cb83-2"><a href="#cb83-2"></a>  <span class="fu">filter</span>(destino <span class="sc">==</span> <span class="st">"ATL"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb83-3"><a href="#cb83-3"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb83-4"><a href="#cb83-4"></a>  <span class="fu">aes</span>(<span class="at">x =</span> atraso_salida, <span class="at">y =</span> atraso_llegada, <span class="at">color =</span> origen) <span class="sc">+</span></span>
-<span id="cb83-5"><a href="#cb83-5"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb83-6"><a href="#cb83-6"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>origen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1"></a>vuelos <span class="sc">%&gt;%</span> </span>
+<span id="cb79-2"><a href="#cb79-2"></a>  <span class="fu">filter</span>(destino <span class="sc">==</span> <span class="st">"ATL"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb79-3"><a href="#cb79-3"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb79-4"><a href="#cb79-4"></a>  <span class="fu">aes</span>(<span class="at">x =</span> atraso_salida, <span class="at">y =</span> atraso_llegada, <span class="at">color =</span> origen) <span class="sc">+</span></span>
+<span id="cb79-5"><a href="#cb79-5"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb79-6"><a href="#cb79-6"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>origen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-41-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-40-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1770,7 +1745,7 @@
 <div class="fragment">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-42-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-41-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1791,7 +1766,7 @@
 <div class="fragment">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-43-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-42-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1808,7 +1783,7 @@
 <div class="fragment">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-44-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-43-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1826,7 +1801,7 @@
 <div class="fragment">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-45-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-44-1.png" width="960"></p>
 </div>
 </div>
 <p><img src="imagenes/logo_portada2.png" class="slide-logo"></p>

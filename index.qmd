@@ -272,21 +272,6 @@ encuesta_long
 ```{r}
 #| echo: TRUE
 #| eval: TRUE
-df1 <- data.frame(id = c(1, 2, 3, 4),
-                  nombre = c("Juan", "María", "Pedro", "Ana"),
-                  edad = c(25, 30, 28, 35))
-df1
-
-df2 <- data.frame(id = c(1, 2, 5),
-                  departamento = c("Ventas", "Marketing", "Recursos Humanos"))
-df2
-```
-
-## Unión de tablas: left_join
-
-```{r}
-#| echo: TRUE
-#| eval: TRUE
 band_members
 
 band_instruments
