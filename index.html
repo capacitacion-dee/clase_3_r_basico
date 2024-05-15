@@ -28,6 +28,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="ine_quarto_styles.css">
@@ -357,8 +422,8 @@
 </ul>
 </div>
 </section>
-<section id="estructuración-de-tablas-pivot_longer" class="slide level2">
-<h2>Estructuración de tablas: pivot_longer</h2>
+<section id="estructuración-de-tablas" class="slide level2">
+<h2>Estructuración de tablas</h2>
 <div class="small-par">
 <ul>
 <li class="fragment">En ocasiones necesitamos transformar el formato de nuestros dataframes, desde <strong>wide</strong> a <strong>long</strong>, o viceversa.</li>
@@ -393,11 +458,11 @@
       }</style></aside>
 </div>
 </section>
-<section id="estructuración-de-tablas-pivot_longer-1" class="slide level2">
-<h2>Estructuración de tablas: pivot_longer</h2>
+<section id="estructuración-de-tablas-1" class="slide level2">
+<h2>Estructuración de tablas</h2>
 <div class="small-par">
 <ul>
-<li class="fragment">Un dataframe en formato <strong>long</strong> (largo) contiene valores que si se repiten en la primera columna y hay una columna adicional que identifica la variable a la que corresponde cada observación. es un tipo de organización de datos en el que cada fila representa una observación única y cada variable tiene su propia columna. En otras palabras, hay una sola columna para todas las observaciones de una variable y una columna adicional que identifica la variable.</li>
+<li class="fragment">Un DataFrame en formato <strong>long</strong> (largo) es un tipo de organización de datos en el que cada fila representa una observación única y cada variable tiene su propia columna. En otras palabras, hay una sola columna para todas las observaciones de una variable y una columna adicional que identifica la variable.</li>
 <li class="fragment">Es común cuando se quiere facilitar el manejo y análisis de datos, especialmente para operaciones como agregaciones, visualizaciones y análisis estadísticos.</li>
 </ul>
 </div>
@@ -420,8 +485,8 @@
 </div>
 <aside class="notes">
 <ul>
-<li>En este ejemplo, vemos que cada fila representa una observación única, en este caso las ventas de un producto en un año específico. Las columnas son Producto, Año y Ventas.</li>
-<li>En el formato long, hay una sola columna para las ventas, y otra columna (Año) que identifica el año correspondiente a cada observación.</li>
+<li>En este DataFrame, cada fila representa una observación única, en este caso las ventas de un producto en un año específico. Las columnas son Producto, Año y Ventas. En el formato long, hay una sola columna para las ventas, y otra columna (Año) que identifica el año correspondiente a cada observación.</li>
+<li>En este ejemplo ambos formatos contienen la misma información pero en formatos diferentes.</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -436,16 +501,1338 @@
       }</style></aside>
 </div>
 </section>
-<section id="estructuración-de-tablas-pivot_longer-2" class="slide level2">
+<section id="estructuración-de-tablas-pivot_longer" class="slide level2">
 <h2>Estructuración de tablas: pivot_longer</h2>
 <div class="small-par">
 <ul>
-<li class="fragment">Veamos un ejemplo usando pivot_longer:</li>
+<li class="fragment"><strong>Función pivot_longer()</strong>: es una función del paquete “tidyr” utilizada para pivotear un datafreame de formato ancho a uno de formato largo.</li>
+<li class="fragment">Sus argumentos son:
+<ul>
+<li class="fragment"><strong>data</strong>: el dataframe a ser modificado.</li>
+<li class="fragment"><strong>cols</strong>: el nombre de las columnas que se van a pivotear.</li>
+<li class="fragment"><strong>names_to</strong>: el nombre de la nueva columna que contendrá los nombres de las categorías.</li>
+<li class="fragment"><strong>values_to</strong>: el nombre de la nueva columna que contendrá los valores correspondientes a cada categoría.</li>
+</ul></li>
+<li class="fragment">Veamos cómo funciona:</li>
 </ul>
+</div>
+</section>
+<section id="estructuración-de-tablas-pivot_longer-1" class="slide level2">
+<h2>Estructuración de tablas: pivot_longer</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>ventas_wide</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  producto 2018 2019 2020
+1        A  100  120  130
+2        B  150  180  160
+3        C  200  220  210</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a>ventas_long <span class="ot">&lt;-</span> ventas_wide <span class="sc">%&gt;%</span> </span>
+<span id="cb5-5"><a href="#cb5-5"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>producto, <span class="at">names_to =</span> <span class="st">"anio"</span>, <span class="at">values_to =</span> <span class="st">"ventas"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6"></a>ventas_long</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 3
+  producto anio  ventas
+  &lt;chr&gt;    &lt;chr&gt;  &lt;dbl&gt;
+1 A        2018     100
+2 A        2019     120
+3 A        2020     130
+4 B        2018     150
+5 B        2019     180
+6 B        2020     160
+7 C        2018     200
+8 C        2019     220
+9 C        2020     210</code></pre>
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li>En este ejemplo estamos convirtiendo ventas_wide a formato long usando pivot_longer()</li>
+<li>En el parámetro cols especificamos las columnas que queremos pivotear o transformar</li>
+<li>En este ejemplo, queremos transformar todas las columnas menos producto, por eso usamos el signo - para seleccionar todas las columnas menos producto, es decir, queremos pivotear las columnas 2018, 2019 y 2020 usando como llave o pivote la columna “producto”</li>
+<li>En el argumento names_to especificamos el nombre de la nueva variable que contendrá los nombres de las columnas 2018, 2019 y 2020 pivoteadas</li>
+<li>En el argumento values_to especificamos el nombre de la nueva variable que contenrá los valores de las columnas transformadas. En este caso, almacenará los valores de las ventas anuales de cada producto.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="estructuración-de-tablas-pivot_wider" class="slide level2">
+<h2>Estructuración de tablas: pivot_wider</h2>
+<div class="small-par">
+<ul>
+<li class="fragment"><strong>Función pivot_wider()</strong>: es una función del paquete “tidyr” utilizada para pivotear un datafreame de formato largo a uno de formato ancho</li>
+<li class="fragment">Sus argumentos son:
+<ul>
+<li class="fragment"><strong>data</strong>: el dataframe a ser modificado.</li>
+<li class="fragment"><strong>names_from</strong>: qué columnas se extenderán y cuyos valores se convertirán en nombres de nuevas columnas.</li>
+<li class="fragment"><strong>values_from</strong>: qué columnas se utilizarán para llenar los valores en las nuevas columnas creadas por la extensión de la variable especificada en names_from.</li>
+</ul></li>
+<li class="fragment">Veamos cómo funciona:</li>
+</ul>
+</div>
+</section>
+<section id="estructuración-de-tablas-pivot_wider-1" class="slide level2">
+<h2>Estructuración de tablas: pivot_wider</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>ventas_long</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 3
+  producto anio  ventas
+  &lt;chr&gt;    &lt;chr&gt;  &lt;dbl&gt;
+1 A        2018     100
+2 A        2019     120
+3 A        2020     130
+4 B        2018     150
+5 B        2019     180
+6 B        2020     160
+7 C        2018     200
+8 C        2019     220
+9 C        2020     210</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb9-3"><a href="#cb9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4"></a>ventas_wide <span class="ot">&lt;-</span> ventas_long <span class="sc">%&gt;%</span> </span>
+<span id="cb9-5"><a href="#cb9-5"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> anio, <span class="at">values_from =</span> ventas, <span class="at">names_prefix =</span> <span class="st">"anio_"</span>)</span>
+<span id="cb9-6"><a href="#cb9-6"></a>ventas_wide</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  producto anio_2018 anio_2019 anio_2020
+  &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 A              100       120       130
+2 B              150       180       160
+3 C              200       220       210</code></pre>
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li>Aquí, las ventas de cada producto se han extendido a través de los años, convirtiéndose en columnas separadas. Cada fila todavía representa un producto único, pero ahora tenemos una estructura de datos más ancha y fácil de interpretar.</li>
+<li>names_prefix es un argumento opcional para agregar un prefijo a las columnas que se van a crear, en este caso estamos usando “anio_”.</li>
+<li>Esto lo hacemos porque es recomendable no nombrar las columnas como números sino que como un texto.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="ejercicio-1" class="slide level2">
+<h2>Ejercicio 1</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Importe el archivo excel “encuesta.xlsx” de la carpeta data usando la función read_excel() del paquete “readxl”, y guárdelo como “encuesta”.</li>
+<li class="fragment">Agrupe el dataframe encuesta por las variables “anio” e “ingreso” y, usando un summarise(), calcule las horas_tv promedio usando la función mean(). Llame a esta variable “horas_prom”. Almacene el dataframe resultante como “encuesta_agrupado”. <strong>Nota</strong>: recuerde usar el argumento na.rm = TRUE para que no considere los valores NA.</li>
+<li class="fragment">Utilizando la función pivot_wider(), convierta el dataframe “encuesta_agrupado” a formato ancho. El nombre de las columnas debe ser el ingreso y los valores las horas de tv promedio. Almacene el dataframe resultante como “encuesta_wide”</li>
+<li class="fragment">Transforme el dataframe “encuesta_wide” a su estructura original, es decir, en formato long, usando pivot_longer(). El dataframe resultante debe ser igual a “encuesta_agrupado”. Almacene este dataframe como “encuesta_long”.</li>
+</ul>
+</div>
+</section>
+<section id="solución-ejercicio-1" class="slide level2">
+<h2>Solución ejercicio 1</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Importe el archivo excel “encuesta.xlsx” de la carpeta data usando la función read_excel() del paquete “readxl”, y guárdelo como “encuesta”.</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb11-2"><a href="#cb11-2"></a>encuesta <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/encuesta.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="solución-ejercicio-1-1" class="slide level2">
+<h2>Solución ejercicio 1</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Agrupe el dataframe encuesta por las variables “anio” e “ingreso” y, usando un summarise(), calcule las horas_tv promedio usando la función mean(). Llame a esta variable “horas_prom”. Almacene el dataframe resultante como “encuesta_agrupado”. <strong>Nota</strong>: recuerde usar el argumento na.rm = TRUE para que no considere los valores NA.</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>encuesta_agrupado <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">group_by</span>(anio, ingreso) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">summarise</span>(<span class="at">horas_prom =</span> <span class="fu">mean</span>(horas_tv, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) </span>
+<span id="cb12-4"><a href="#cb12-4"></a>encuesta_agrupado</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 125 × 3
+# Groups:   anio [8]
+    anio ingreso       horas_prom
+   &lt;dbl&gt; &lt;chr&gt;              &lt;dbl&gt;
+ 1  2000 1000 - 2999         2.81
+ 2  2000 10000 - 14999       2.65
+ 3  2000 15000 - 19999       2.85
+ 4  2000 20000 - 24999       2.65
+ 5  2000 25000 o más         2.26
+ 6  2000 3000 - 3999         3.36
+ 7  2000 4000 - 4999         2.1 
+ 8  2000 5000 - 5999         3.65
+ 9  2000 6000 - 6999         2.96
+10  2000 7000 - 7999         2.78
+# ℹ 115 more rows</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="solución-ejercicio-1-2" class="slide level2">
+<h2>Solución ejercicio 1</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Utilizando la función pivot_wider(), convierta el dataframe “encuesta_agrupado” a formato ancho. El nombre de las columnas debe ser el ingreso y los valores las horas de tv promedio. Almacene el dataframe resultante como “encuesta_wide”</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>encuesta_wide <span class="ot">&lt;-</span> encuesta_agrupado <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> ingreso, <span class="at">values_from =</span> horas_prom)</span>
+<span id="cb14-3"><a href="#cb14-3"></a>encuesta_wide</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 17
+# Groups:   anio [8]
+   anio `1000 - 2999` `10000 - 14999` `15000 - 19999` `20000 - 24999`
+  &lt;dbl&gt;         &lt;dbl&gt;           &lt;dbl&gt;           &lt;dbl&gt;           &lt;dbl&gt;
+1  2000          2.81            2.65            2.85            2.65
+2  2002          4.05            3.68            3.17            2.84
+3  2004          2.25            2.60            2.81            3.03
+4  2006          3.14            3.16            2.75            2.83
+5  2008          3.23            3.03            2.85            2.43
+6  2010          2.06            3.09            2.71            2.72
+7  2012          2.89            3.32            3.18            2.93
+8  2014          3.76            2.87            3.11            2.98
+# ℹ 12 more variables: `25000 o más` &lt;dbl&gt;, `3000 - 3999` &lt;dbl&gt;,
+#   `4000 - 4999` &lt;dbl&gt;, `5000 - 5999` &lt;dbl&gt;, `6000 - 6999` &lt;dbl&gt;,
+#   `7000 - 7999` &lt;dbl&gt;, `8000 - 9999` &lt;dbl&gt;, `Menos de 1000` &lt;dbl&gt;,
+#   `No aplica` &lt;dbl&gt;, `No sabe` &lt;dbl&gt;, `Se niega a responder` &lt;dbl&gt;,
+#   `Sin respuesta` &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="solución-ejercicio-1-3" class="slide level2">
+<h2>Solución ejercicio 1</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Transforme el dataframe “encuesta_wide” a su estructura original, es decir, en formato long usando pivot_longer(). El dataframe resultante debe ser igual a “encuesta_agrupado”. Almacene este dataframe como “encuesta_long”.</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>encuesta_long <span class="ot">&lt;-</span> encuesta_wide <span class="sc">%&gt;%</span> </span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>anio, <span class="at">names_to =</span> <span class="st">"ingreso"</span>, <span class="at">values_to =</span> <span class="st">"horas_prom"</span>)</span>
+<span id="cb16-3"><a href="#cb16-3"></a>encuesta_long</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 128 × 3
+# Groups:   anio [8]
+    anio ingreso       horas_prom
+   &lt;dbl&gt; &lt;chr&gt;              &lt;dbl&gt;
+ 1  2000 1000 - 2999         2.81
+ 2  2000 10000 - 14999       2.65
+ 3  2000 15000 - 19999       2.85
+ 4  2000 20000 - 24999       2.65
+ 5  2000 25000 o más         2.26
+ 6  2000 3000 - 3999         3.36
+ 7  2000 4000 - 4999         2.1 
+ 8  2000 5000 - 5999         3.65
+ 9  2000 6000 - 6999         2.96
+10  2000 7000 - 7999         2.78
+# ℹ 118 more rows</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="unión-de-tablas" class="slide level2">
+<h2>Unión de tablas</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Una tarea común en el análisis de datos es reunir diferentes conjuntos de datos, de modo que podamos combinar columnas de dos (o más) tablas.</li>
+<li class="fragment">Esto se puede lograr utilizando la familia de funciones join en dplyr.</li>
+<li class="fragment">Existen diferentes tipos de uniones, que se pueden representar mediante una serie de diagramas de Venn:</li>
+</ul>
+</div>
+<p><img data-src="imagenes/Captura.PNG"></p>
+<aside class="notes">
+<ul>
+<li>El inner_join devuelve solo las filas coincidentes de ambos marcos de datos, excluyendo las filas que no coinciden.</li>
+<li>El left_join devuelve todas las filas del marco de datos izquierdo (o primero) y las filas coincidentes del marco de datos derecho (o segundo). Las filas que no coinciden en el marco de datos derecho se llenan con NA.</li>
+<li>El right_join devuelve todas las filas del marco de datos derecho (o segundo) y las filas coincidentes del marco de datos izquierdo (o primero). Las filas que no coinciden en el marco de datos izquierdo se llenan con NA.</li>
+<li>El full_join devuelve todas las filas de ambos marcos de datos, incluidas las filas coincidentes y no coincidentes. Las filas que no coinciden se rellenan con NA.</li>
+<li>El anti_join devuelve solo las filas del primer marco de datos que no coinciden en el segundo conjunto de datos.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="unión-de-tablas-left_join" class="slide level2">
+<h2>Unión de tablas: left_join</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">id =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
+<span id="cb18-2"><a href="#cb18-2"></a>                  <span class="at">nombre =</span> <span class="fu">c</span>(<span class="st">"Juan"</span>, <span class="st">"María"</span>, <span class="st">"Pedro"</span>, <span class="st">"Ana"</span>),</span>
+<span id="cb18-3"><a href="#cb18-3"></a>                  <span class="at">edad =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">28</span>, <span class="dv">35</span>))</span>
+<span id="cb18-4"><a href="#cb18-4"></a>df1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id nombre edad
+1  1   Juan   25
+2  2  María   30
+3  3  Pedro   28
+4  4    Ana   35</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">id =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>),</span>
+<span id="cb20-2"><a href="#cb20-2"></a>                  <span class="at">departamento =</span> <span class="fu">c</span>(<span class="st">"Ventas"</span>, <span class="st">"Marketing"</span>, <span class="st">"Recursos Humanos"</span>))</span>
+<span id="cb20-3"><a href="#cb20-3"></a>df2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id     departamento
+1  1           Ventas
+2  2        Marketing
+3  5 Recursos Humanos</code></pre>
+</div>
+</div>
+</section>
+<section id="unión-de-tablas-left_join-1" class="slide level2">
+<h2>Unión de tablas: left_join</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>band_members</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  name  band   
+  &lt;chr&gt; &lt;chr&gt;  
+1 Mick  Stones 
+2 John  Beatles
+3 Paul  Beatles</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>band_instruments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  name  plays 
+  &lt;chr&gt; &lt;chr&gt; 
+1 John  guitar
+2 Paul  bass  
+3 Keith guitar</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>band_members <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(band_instruments, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"name"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  name  band    plays 
+  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; 
+1 Mick  Stones  &lt;NA&gt;  
+2 John  Beatles guitar
+3 Paul  Beatles bass  </code></pre>
+</div>
+</div>
+</section>
+<section id="unión-de-tablas-left_join-2" class="slide level2">
+<h2>Unión de tablas: left_join</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Qué pasa si el nombre de las columnas identificadoras no son iguales?</li>
+</ul>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>band_members</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  name  band   
+  &lt;chr&gt; &lt;chr&gt;  
+1 Mick  Stones 
+2 John  Beatles
+3 Paul  Beatles</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>band_instruments2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  artist plays 
+  &lt;chr&gt;  &lt;chr&gt; 
+1 John   guitar
+2 Paul   bass  
+3 Keith  guitar</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>band_members <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(band_instruments2, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"name"</span><span class="ot">=</span><span class="st">"artist"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  name  band    plays 
+  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; 
+1 Mick  Stones  &lt;NA&gt;  
+2 John  Beatles guitar
+3 Paul  Beatles bass  </code></pre>
+</div>
+</div>
+</section>
+<section id="unión-de-tablas-left_join-3" class="slide level2">
+<h2>Unión de tablas: left_join</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Qué pasa si necesitamos más de una variable identificadora?</li>
+</ul>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># Conjunto de datos de ventas</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a>ventas <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">vendedor =</span> <span class="fu">c</span>(<span class="st">"Juan"</span>, <span class="st">"María"</span>, <span class="st">"Juan"</span>, <span class="st">"Pedro"</span>, <span class="st">"María"</span>, <span class="st">"Pedro"</span>),</span>
+<span id="cb34-3"><a href="#cb34-3"></a>                     <span class="at">departamento =</span> <span class="fu">c</span>(<span class="st">"Ventas"</span>, <span class="st">"Marketing"</span>, <span class="st">"Ventas"</span>, <span class="st">"Ventas"</span>, <span class="st">"Marketing"</span>, <span class="st">"Ventas"</span>),</span>
+<span id="cb34-4"><a href="#cb34-4"></a>                     <span class="at">ventas =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">150</span>, <span class="dv">200</span>, <span class="dv">120</span>, <span class="dv">180</span>, <span class="dv">160</span>))</span>
+<span id="cb34-5"><a href="#cb34-5"></a>ventas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  vendedor departamento ventas
+1     Juan       Ventas    100
+2    María    Marketing    150
+3     Juan       Ventas    200
+4    Pedro       Ventas    120
+5    María    Marketing    180
+6    Pedro       Ventas    160</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="co"># Conjunto de datos de vendedores</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a>vendedores <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">vendedor =</span> <span class="fu">c</span>(<span class="st">"Juan"</span>, <span class="st">"María"</span>, <span class="st">"Pedro"</span>),</span>
+<span id="cb36-3"><a href="#cb36-3"></a>                         <span class="at">departamento =</span> <span class="fu">c</span>(<span class="st">"Ventas"</span>, <span class="st">"Marketing"</span>, <span class="st">"Ventas"</span>),</span>
+<span id="cb36-4"><a href="#cb36-4"></a>                         <span class="at">experiencia =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">3</span>))</span>
+<span id="cb36-5"><a href="#cb36-5"></a>vendedores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  vendedor departamento experiencia
+1     Juan       Ventas           5
+2    María    Marketing           7
+3    Pedro       Ventas           3</code></pre>
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li>Hasta ahora hemos visto que para hacer un join necesitamos una variable identificadora. Esta es una variable o conjunto de variables que identifica de forma única cada observación.</li>
+<li>En este ejemplo tenemos un dataframe llamado ventas que contiene las columnas vendedor, departamento y ventas. También tenemos un dataframe llamado vendedores con las columnas vendedor, departamento y experiencia.</li>
+<li>Queremos hacer un left_join de ventas con vendedores para obtener la columna experiencia.</li>
+<li>Sin embargo, vemos que la columna vendedor del dataframe ventas no es un indentificador único de personas porque Juan, María y Pedro se repiten más de una vez en el dataframe. Pero si usamos la combinación vendedor y departamento podemos obtener combinaciones únicas de personas. Entonces al hacer el left_join usamos en el argumento by ambas columnas.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>ventas <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(vendedores, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"vendedor"</span>,<span class="st">"departamento"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  vendedor departamento ventas experiencia
+1     Juan       Ventas    100           5
+2    María    Marketing    150           7
+3     Juan       Ventas    200           5
+4    Pedro       Ventas    120           3
+5    María    Marketing    180           7
+6    Pedro       Ventas    160           3</code></pre>
+</div>
+</div>
+</section>
+<section id="unión-de-tablas-right_join" class="slide level2">
+<h2>Unión de tablas: right_join</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>band_members</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  name  band   
+  &lt;chr&gt; &lt;chr&gt;  
+1 Mick  Stones 
+2 John  Beatles
+3 Paul  Beatles</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>band_instruments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  name  plays 
+  &lt;chr&gt; &lt;chr&gt; 
+1 John  guitar
+2 Paul  bass  
+3 Keith guitar</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a>band_members <span class="sc">%&gt;%</span> <span class="fu">right_join</span>(band_instruments, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"name"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  name  band    plays 
+  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; 
+1 John  Beatles guitar
+2 Paul  Beatles bass  
+3 Keith &lt;NA&gt;    guitar</code></pre>
+</div>
+</div>
+</section>
+<section id="unión-de-tablas-full_join" class="slide level2">
+<h2>Unión de tablas: full_join</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>band_members</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  name  band   
+  &lt;chr&gt; &lt;chr&gt;  
+1 Mick  Stones 
+2 John  Beatles
+3 Paul  Beatles</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a>band_instruments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  name  plays 
+  &lt;chr&gt; &lt;chr&gt; 
+1 John  guitar
+2 Paul  bass  
+3 Keith guitar</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a>band_members <span class="sc">%&gt;%</span> <span class="fu">full_join</span>(band_instruments, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"name"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  name  band    plays 
+  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; 
+1 Mick  Stones  &lt;NA&gt;  
+2 John  Beatles guitar
+3 Paul  Beatles bass  
+4 Keith &lt;NA&gt;    guitar</code></pre>
+</div>
+</div>
+</section>
+<section id="unión-de-tablas-anti_join" class="slide level2">
+<h2>Unión de tablas: anti_join</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a>band_members</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  name  band   
+  &lt;chr&gt; &lt;chr&gt;  
+1 Mick  Stones 
+2 John  Beatles
+3 Paul  Beatles</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a>band_instruments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  name  plays 
+  &lt;chr&gt; &lt;chr&gt; 
+1 John  guitar
+2 Paul  bass  
+3 Keith guitar</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a>band_members <span class="sc">%&gt;%</span> <span class="fu">anti_join</span>(band_instruments, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"name"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  name  band  
+  &lt;chr&gt; &lt;chr&gt; 
+1 Mick  Stones</code></pre>
+</div>
+</div>
+</section>
+<section id="ejercicio-2" class="slide level2">
+<h2>Ejercicio 2</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Para este ejercicio usaremos varias bases provenientes del paquete “nycflights13”.</li>
+<li class="fragment">Este paquete contiene 5 dataframes:
+<ul>
+<li class="fragment"><strong>airlines</strong>: contiene el nombre de cada aerolínea</li>
+<li class="fragment"><strong>airports</strong>: contiene el nombre y localización de los aeropuertos</li>
+<li class="fragment"><strong>flights</strong>: contiene información de todos los vuelos</li>
+<li class="fragment"><strong>planes</strong>: información de construcción sobre cada uno de los aviones utilizados</li>
+<li class="fragment"><strong>weather</strong>: datos meteorológicos por hora para cada uno de los tres aeropuertos de Nueva York</li>
+</ul></li>
+<li class="fragment">Estas bases se relacionan de la siguiente manera:</li>
+</ul>
+</div>
+<p><img data-src="imagenes/vuelos.PNG"></p>
+</section>
+<section id="ejercicio-2-1" class="slide level2">
+<h2>Ejercicio 2</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Instale y cargue el paquete “nycflights13”.</li>
+<li class="fragment">Del dataframe “flights” seleccione las columnas “time_hour”, “origin”, “dest”, “tailnum” y “carrier”. Almacene este resultado como “flights2”.</li>
+<li class="fragment">Haga un left_join entre “flights2” y “airlines” usando la llave correspondiente.</li>
+<li class="fragment">Haga un left_join entre “flights2” y “planes” usando la llave correspondiente.</li>
+<li class="fragment">Haga un left_join entre “flights2” y “weather” usando las llaves correspondientes.</li>
+<li class="fragment">Haga un anti_join entre “flights2” y “planes” usando la llave correspondiente.</li>
+</ul>
+</div>
+</section>
+<section id="solución-ejercicio-2" class="slide level2">
+<h2>Solución ejercicio 2</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Instale y cargue el paquete “nycflights13”.</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a><span class="co">#install.packages("nycflights13")</span></span>
+<span id="cb58-2"><a href="#cb58-2"></a><span class="fu">library</span>(nycflights13)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="solución-ejercicio-2-1" class="slide level2">
+<h2>Solución ejercicio 2</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Del dataframe “flights” seleccione las columnas “time_hour”, “origin”, “dest”, “tailnum” y “carrier”. Almacene este resultado como “flights2”.</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a>flights2 <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span> </span>
+<span id="cb59-2"><a href="#cb59-2"></a>  <span class="fu">select</span>(time_hour, origin, dest, tailnum, carrier)</span>
+<span id="cb59-3"><a href="#cb59-3"></a>flights2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 5
+   time_hour           origin dest  tailnum carrier
+   &lt;dttm&gt;              &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  
+ 1 2013-01-01 05:00:00 EWR    IAH   N14228  UA     
+ 2 2013-01-01 05:00:00 LGA    IAH   N24211  UA     
+ 3 2013-01-01 05:00:00 JFK    MIA   N619AA  AA     
+ 4 2013-01-01 05:00:00 JFK    BQN   N804JB  B6     
+ 5 2013-01-01 06:00:00 LGA    ATL   N668DN  DL     
+ 6 2013-01-01 05:00:00 EWR    ORD   N39463  UA     
+ 7 2013-01-01 06:00:00 EWR    FLL   N516JB  B6     
+ 8 2013-01-01 06:00:00 LGA    IAD   N829AS  EV     
+ 9 2013-01-01 06:00:00 JFK    MCO   N593JB  B6     
+10 2013-01-01 06:00:00 LGA    ORD   N3ALAA  AA     
+# ℹ 336,766 more rows</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="solución-ejercicio-2-2" class="slide level2">
+<h2>Solución ejercicio 2</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Haga un left_join entre “flights2” y “airlines” usando la llave correspondiente.</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a>flights2 <span class="sc">%&gt;%</span> </span>
+<span id="cb61-2"><a href="#cb61-2"></a>  <span class="fu">left_join</span>(airlines, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"carrier"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 6
+   time_hour           origin dest  tailnum carrier name                    
+   &lt;dttm&gt;              &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;                   
+ 1 2013-01-01 05:00:00 EWR    IAH   N14228  UA      United Air Lines Inc.   
+ 2 2013-01-01 05:00:00 LGA    IAH   N24211  UA      United Air Lines Inc.   
+ 3 2013-01-01 05:00:00 JFK    MIA   N619AA  AA      American Airlines Inc.  
+ 4 2013-01-01 05:00:00 JFK    BQN   N804JB  B6      JetBlue Airways         
+ 5 2013-01-01 06:00:00 LGA    ATL   N668DN  DL      Delta Air Lines Inc.    
+ 6 2013-01-01 05:00:00 EWR    ORD   N39463  UA      United Air Lines Inc.   
+ 7 2013-01-01 06:00:00 EWR    FLL   N516JB  B6      JetBlue Airways         
+ 8 2013-01-01 06:00:00 LGA    IAD   N829AS  EV      ExpressJet Airlines Inc.
+ 9 2013-01-01 06:00:00 JFK    MCO   N593JB  B6      JetBlue Airways         
+10 2013-01-01 06:00:00 LGA    ORD   N3ALAA  AA      American Airlines Inc.  
+# ℹ 336,766 more rows</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="solución-ejercicio-2-3" class="slide level2">
+<h2>Solución ejercicio 2</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Haga un left_join entre “flights2” y “planes” usando la llave correspondiente.</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a>flights2 <span class="sc">%&gt;%</span> </span>
+<span id="cb63-2"><a href="#cb63-2"></a>  <span class="fu">left_join</span>(planes, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"tailnum"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 13
+   time_hour           origin dest  tailnum carrier  year type      manufacturer
+   &lt;dttm&gt;              &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;       
+ 1 2013-01-01 05:00:00 EWR    IAH   N14228  UA       1999 Fixed wi… BOEING      
+ 2 2013-01-01 05:00:00 LGA    IAH   N24211  UA       1998 Fixed wi… BOEING      
+ 3 2013-01-01 05:00:00 JFK    MIA   N619AA  AA       1990 Fixed wi… BOEING      
+ 4 2013-01-01 05:00:00 JFK    BQN   N804JB  B6       2012 Fixed wi… AIRBUS      
+ 5 2013-01-01 06:00:00 LGA    ATL   N668DN  DL       1991 Fixed wi… BOEING      
+ 6 2013-01-01 05:00:00 EWR    ORD   N39463  UA       2012 Fixed wi… BOEING      
+ 7 2013-01-01 06:00:00 EWR    FLL   N516JB  B6       2000 Fixed wi… AIRBUS INDU…
+ 8 2013-01-01 06:00:00 LGA    IAD   N829AS  EV       1998 Fixed wi… CANADAIR    
+ 9 2013-01-01 06:00:00 JFK    MCO   N593JB  B6       2004 Fixed wi… AIRBUS      
+10 2013-01-01 06:00:00 LGA    ORD   N3ALAA  AA         NA &lt;NA&gt;      &lt;NA&gt;        
+# ℹ 336,766 more rows
+# ℹ 5 more variables: model &lt;chr&gt;, engines &lt;int&gt;, seats &lt;int&gt;, speed &lt;int&gt;,
+#   engine &lt;chr&gt;</code></pre>
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li>Acá podemos ver que el código de cola o tailnum N3ALAA tiene NA en las columnas que se pegaron porque no hay información acerca del avión con ese código de cola, es decir no hubo match, entonces esos valores se reemplazan por NA</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="solución-ejercicio-2-4" class="slide level2">
+<h2>Solución ejercicio 2</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Haga un left_join entre “flights2” y “weather” usando las llaves correspondientes.</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a>flights2 <span class="sc">%&gt;%</span> </span>
+<span id="cb65-2"><a href="#cb65-2"></a>  <span class="fu">left_join</span>(weather, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"time_hour"</span>, <span class="st">"origin"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 18
+   time_hour           origin dest  tailnum carrier  year month   day  hour
+   &lt;dttm&gt;              &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+ 1 2013-01-01 05:00:00 EWR    IAH   N14228  UA       2013     1     1     5
+ 2 2013-01-01 05:00:00 LGA    IAH   N24211  UA       2013     1     1     5
+ 3 2013-01-01 05:00:00 JFK    MIA   N619AA  AA       2013     1     1     5
+ 4 2013-01-01 05:00:00 JFK    BQN   N804JB  B6       2013     1     1     5
+ 5 2013-01-01 06:00:00 LGA    ATL   N668DN  DL       2013     1     1     6
+ 6 2013-01-01 05:00:00 EWR    ORD   N39463  UA       2013     1     1     5
+ 7 2013-01-01 06:00:00 EWR    FLL   N516JB  B6       2013     1     1     6
+ 8 2013-01-01 06:00:00 LGA    IAD   N829AS  EV       2013     1     1     6
+ 9 2013-01-01 06:00:00 JFK    MCO   N593JB  B6       2013     1     1     6
+10 2013-01-01 06:00:00 LGA    ORD   N3ALAA  AA       2013     1     1     6
+# ℹ 336,766 more rows
+# ℹ 9 more variables: temp &lt;dbl&gt;, dewp &lt;dbl&gt;, humid &lt;dbl&gt;, wind_dir &lt;dbl&gt;,
+#   wind_speed &lt;dbl&gt;, wind_gust &lt;dbl&gt;, precip &lt;dbl&gt;, pressure &lt;dbl&gt;,
+#   visib &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="solución-ejercicio-2-5" class="slide level2">
+<h2>Solución ejercicio 2</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Haga un anti_join entre “flights2” y “planes” usando la llave correspondiente.</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a>flights2 <span class="sc">%&gt;%</span> </span>
+<span id="cb67-2"><a href="#cb67-2"></a>  <span class="fu">anti_join</span>(planes, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"tailnum"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 52,606 × 5
+   time_hour           origin dest  tailnum carrier
+   &lt;dttm&gt;              &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  
+ 1 2013-01-01 06:00:00 LGA    ORD   N3ALAA  AA     
+ 2 2013-01-01 06:00:00 LGA    DFW   N3DUAA  AA     
+ 3 2013-01-01 06:00:00 LGA    ATL   N542MQ  MQ     
+ 4 2013-01-01 06:00:00 LGA    DTW   N730MQ  MQ     
+ 5 2013-01-01 06:00:00 EWR    ORD   N9EAMQ  MQ     
+ 6 2013-01-01 06:00:00 JFK    SFO   N532UA  UA     
+ 7 2013-01-01 06:00:00 LGA    MIA   N3EMAA  AA     
+ 8 2013-01-01 06:00:00 LGA    MSP   N518MQ  MQ     
+ 9 2013-01-01 06:00:00 JFK    SJU   N3BAAA  AA     
+10 2013-01-01 06:00:00 LGA    ORD   N3CYAA  AA     
+# ℹ 52,596 more rows</code></pre>
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li>Acá el anti_join retorna todas las filas de flights2 que no hicieron match con planes. Esto nos permite conocer cuáles filas están siendo rellenadas con NA.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="visualización-de-datos-con-ggplot" class="slide level2">
+<h2>Visualización de datos con ggplot</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">ggplot2 es un paquete popular de visualización de datos en el lenguaje de programación R.</li>
+<li class="fragment">Permite a los usuarios crear una amplia variedad de gráficos estadísticos personalizables y de alta calidad, lo que lo convierte en una herramienta valiosa para la exploración y presentación de datos.</li>
+<li class="fragment">El término ggplot2 se relaciona con el nombre del paquete.</li>
+<li class="fragment">Usamos la función ggplot() para producir los gráficos cuando usamos el paquete. Por lo tanto, ggplot() es el comando y el paquete completo se llama ggplot2.</li>
+<li class="fragment">Los gráficos se componen de capas, cada una definida por su propio conjunto de reglas.</li>
+</ul>
+</div>
+<p><img data-src="imagenes/ggplot_capas.PNG"></p>
+<aside class="notes">
+<ul>
+<li>Dentro de las capas más utilizadas tenemos:
+<ul>
+<li>data: Esta es la capa base donde se especifican los datos que se utilizarán para crear el gráfico.</li>
+<li>Estética: La estética controla cómo se visualizan los datos en el gráfico. Puedes mapear variables a propiedades visuales como color, forma, tamaño, etc., utilizando la función aes()</li>
+<li>Geometrías: Las geometrías determinan el tipo de gráfico que se creará</li>
+<li>Facetas (facet): Las facetas permiten dividir el gráfico en múltiples paneles, cada uno de los cuales muestra una porción de los datos.</li>
+<li>La quinta capa es la capa de estadísticas, donde el paquete utiliza diferentes funciones estadísticas (por ejemplo, media, desviación estándar, recuentos, etc.) para producir nuevos valores que luego se pueden representar en el gráfico.</li>
+<li>La sexta capa trabaja con elementos conectados a las coordenadas del gráfico. Estas características son un poco más avanzadas. Pero, esta capa nos permite crear gráficos circulares, establecer el tamaño del gráfico e incluso ubicar elementos específicos, como etiquetas de texto, en partes específicas de un gráfico.</li>
+<li>La última capa incluye todos los elementos del tema.Sse utiliza para personalizar el aspecto visual del gráfico, como los ejes, la leyenda, los títulos, los márgenes y otras características relacionadas con el diseño y la apariencia del gráfico en general.</li>
+</ul></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="visualización-de-datos-con-ggplot-1" class="slide level2">
+<h2>Visualización de datos con ggplot</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Veamos cómo hacer un gráfico de barras simple usando geom_bar</li>
+<li class="fragment">Para esto usaremos la base llamada “gapminder”</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a>gapminder <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/gapminder.xlsx"</span>)</span>
+<span id="cb69-2"><a href="#cb69-2"></a><span class="fu">summary</span>(gapminder)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   country           continent              year         lifeExp     
+ Length:1704        Length:1704        Min.   :1952   Min.   :23.60  
+ Class :character   Class :character   1st Qu.:1966   1st Qu.:48.20  
+ Mode  :character   Mode  :character   Median :1980   Median :60.71  
+                                       Mean   :1980   Mean   :59.47  
+                                       3rd Qu.:1993   3rd Qu.:70.85  
+                                       Max.   :2007   Max.   :82.60  
+      pop              gdpPercap       
+ Min.   :6.001e+04   Min.   :   241.2  
+ 1st Qu.:2.794e+06   1st Qu.:  1202.1  
+ Median :7.024e+06   Median :  3531.8  
+ Mean   :2.960e+07   Mean   :  7215.3  
+ 3rd Qu.:1.959e+07   3rd Qu.:  9325.5  
+ Max.   :1.319e+09   Max.   :113523.1  </code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="visualización-de-datos-con-ggplot-2" class="slide level2">
+<h2>Visualización de datos con ggplot</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a><span class="co">#install.packages("ggplot2")</span></span>
+<span id="cb71-2"><a href="#cb71-2"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb71-3"><a href="#cb71-3"></a>gapminder <span class="sc">%&gt;%</span> </span>
+<span id="cb71-4"><a href="#cb71-4"></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">2007</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb71-5"><a href="#cb71-5"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb71-6"><a href="#cb71-6"></a>  <span class="fu">aes</span>(<span class="at">x =</span> continent) <span class="sc">+</span></span>
+<span id="cb71-7"><a href="#cb71-7"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-28-1.png" width="960"></p>
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li>Aquí, utilizamos el dataframe gapminder y filtramos para el año 2007. Luego usamos la función ggplot() para decirle a R que queremos generar un gráfico. De aquí en adelante utilizamos el signo + para ir añadiendo más capas al gráfico</li>
+<li>Dentro de la función aes() (capa estétitca), estamos asignando la variable continente al eje x con x = continent. Hay 5 categorías en la variable continente y aparecen en el eje x del gráfico.</li>
+<li>La función aes() nos permite asignar variables de nuestro dataframe a los atributos estéticos del gráfico.</li>
+<li>geom_bar() (capa geométrica) especifica que queremos trazar un gráfico de barras.</li>
+<li>Cuando creamos un gráfico de barras, siempre necesitamos asignar una variable categórica al eje x o y.</li>
+<li>Acá no asignamos ninguna variable al eje y. Debido a esto, por defecto, ggplot simplemente contó el número de registros por categoría (es decir, por continente). Entonces, la longitud de la barra (el eje y, en este caso) representa el recuento del número de registros.</li>
+<li>Por ejemplo, Oceanía tiene solamente dos registros en el 2007, que en este caso son dos países.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="visualización-de-datos-con-ggplot-3" class="slide level2">
+<h2>Visualización de datos con ggplot</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Veamos cómo hacer un gráfico de barras seteando la longitud de la barra</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a>gapminder <span class="sc">%&gt;%</span> </span>
+<span id="cb72-2"><a href="#cb72-2"></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">2007</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb72-3"><a href="#cb72-3"></a>  <span class="fu">group_by</span>(continent) <span class="sc">%&gt;%</span> </span>
+<span id="cb72-4"><a href="#cb72-4"></a>  <span class="fu">summarise</span>(<span class="at">gdpPercap_prom =</span> <span class="fu">mean</span>(gdpPercap)) <span class="sc">%&gt;%</span> </span>
+<span id="cb72-5"><a href="#cb72-5"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb72-6"><a href="#cb72-6"></a>  <span class="fu">aes</span>(<span class="at">x =</span> continent, <span class="at">y =</span> gdpPercap_prom) <span class="sc">+</span></span>
+<span id="cb72-7"><a href="#cb72-7"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-29-1.png" width="960"></p>
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li>Supongamos que queremos graficar el pib per cápita promedio de cada continente para el año 2007.</li>
+<li>Nuevamente seteamos la variable categórica (continente) en el eje x.</li>
+<li>Pero en esta visualización establecemos el eje y como el pib per cápita promedio, es decir, la longitud de la barra representa un valor contenido en una variable, en este caso, gdpPercap_prom</li>
+<li>Adicionalmente, para que esto funcione, agregamos un parámetro adicional dentro de geom_bar llamado stat.</li>
+<li>Al establecer stat = ‘identity’, le estamos diciendo a ggplot que en lugar de realizar una operación estadística (es decir, contar los registros), le estamos diciendo a ggplot que la longitud de la barra debe ser “idéntica” al valor de la variable numérica pib per capita promedio</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="visualización-de-datos-con-ggplot-4" class="slide level2">
+<h2>Visualización de datos con ggplot</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Podemos agregar más elementos como títulos, colores y etiquetas…</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1"></a>gapminder <span class="sc">%&gt;%</span> </span>
+<span id="cb73-2"><a href="#cb73-2"></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">2007</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb73-3"><a href="#cb73-3"></a>  <span class="fu">group_by</span>(continent) <span class="sc">%&gt;%</span> </span>
+<span id="cb73-4"><a href="#cb73-4"></a>  <span class="fu">summarise</span>(<span class="at">gdpPercap_prom =</span> <span class="fu">mean</span>(gdpPercap)) <span class="sc">%&gt;%</span> </span>
+<span id="cb73-5"><a href="#cb73-5"></a>  <span class="fu">mutate</span>(<span class="at">gdpPercap_prom =</span> <span class="fu">round</span>(gdpPercap_prom, <span class="dv">0</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb73-6"><a href="#cb73-6"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb73-7"><a href="#cb73-7"></a>  <span class="fu">aes</span>(<span class="at">x =</span> continent, <span class="at">y =</span> gdpPercap_prom, <span class="at">label =</span> gdpPercap_prom) <span class="sc">+</span></span>
+<span id="cb73-8"><a href="#cb73-8"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb73-9"><a href="#cb73-9"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Continente"</span>, <span class="at">y =</span> <span class="st">"PIB per cápita promedio"</span>, <span class="at">title =</span> <span class="st">"PIB per cápita promedio por continente (2017)"</span>) <span class="sc">+</span></span>
+<span id="cb73-10"><a href="#cb73-10"></a>  <span class="fu">geom_label</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-30-1.png" width="960"></p>
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li>Al gráfico anterior también podemos agregarle etiquetas, colores y títulos.</li>
+<li>Por ejemplo, para agregar las etiquetas a las columnas se establece un tercer parámetro dentro de la función aes llamado label para decirle a ggplot que queremos que nuestras etiquetas sean el pib per cápita promedio.</li>
+<li>Luego se añade la capa geom_label para que aparezcan las etiquetas sobre las barras.</li>
+<li>Para setear un color a las barras debemos usar el parámetro fill dentro de geom_bar para que rellene con el color azul.</li>
+<li>Finalmente, los títulos de los ejes y del gráfico se pueden establecer con la función labs.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="visualización-de-datos-con-ggplot-5" class="slide level2">
+<h2>Visualización de datos con ggplot</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Colocando barras una al lado de la otra usando position = “dodge”</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a>gapminder <span class="sc">%&gt;%</span> </span>
+<span id="cb74-2"><a href="#cb74-2"></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">1997</span> <span class="sc">|</span> year<span class="sc">==</span><span class="dv">2007</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb74-3"><a href="#cb74-3"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Chile"</span>, <span class="st">"Argentina"</span>, <span class="st">"Bolivia"</span>, <span class="st">"Brazil"</span>, <span class="st">"Colombia"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb74-4"><a href="#cb74-4"></a>  <span class="fu">mutate</span>(<span class="at">pop =</span> pop<span class="sc">/</span><span class="dv">1000</span>,</span>
+<span id="cb74-5"><a href="#cb74-5"></a>         <span class="at">year =</span> <span class="fu">as.factor</span>(year)) <span class="sc">%&gt;%</span> </span>
+<span id="cb74-6"><a href="#cb74-6"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb74-7"><a href="#cb74-7"></a>  <span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">y =</span> pop, <span class="at">fill =</span> year) <span class="sc">+</span></span>
+<span id="cb74-8"><a href="#cb74-8"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb74-9"><a href="#cb74-9"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"País"</span>, <span class="at">y =</span> <span class="st">"Población (en miles)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-31-1.png" width="960"></p>
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li>En este ejemplo filtramos la base para los años 1997 y 2007. Luego seleccionamos los países Chile, Argentina, Bolivia, Brazil y Colombia. Luego usando un mutate modificamos la variable población como población dividido en mil, y convertimos el año en una variable tipo factor (esto lo hacemos para que al gráficar ggplot no tome la variable como una variable númerica contínua, sino que como una variable categórica que puede tomar dos valores 1997 y 2007)</li>
+<li>Usamos la función ggplot para decirle a R que queremos hacer un gráfico.</li>
+<li>Con aes le decimos que queremos que en el eje x aparezcan los países y en el eje y el valor de la población, y usando fill = year le decimos que queremos que rellene las barras según el año.</li>
+<li>En geom_bar asignamos stat = “identity” para que el largo de las barras sea exactamente el valor de la población y se agrega un parámetro adicional llamado position para establecer que las barras queden una al lado de la otra y no una encima de la otra que es lo hace por defecto si no establecemos este parámetro.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="visualización-de-datos-con-ggplot-6" class="slide level2">
+<h2>Visualización de datos con ggplot</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Hacer gráficos de líneas usando geom_line()</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a>gapminder <span class="sc">%&gt;%</span></span>
+<span id="cb75-2"><a href="#cb75-2"></a>  <span class="fu">group_by</span>(continent, year) <span class="sc">%&gt;%</span></span>
+<span id="cb75-3"><a href="#cb75-3"></a>  <span class="fu">summarise</span>(<span class="at">lifeExp_prom =</span> <span class="fu">mean</span>(lifeExp)) <span class="sc">%&gt;%</span></span>
+<span id="cb75-4"><a href="#cb75-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>lifeExp_prom, <span class="at">color=</span>continent)) <span class="sc">+</span></span>
+<span id="cb75-5"><a href="#cb75-5"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-32-1.png" width="960"></p>
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li>En este ejemplo queremos gráficar la serie histórica de la esperanza de vida promedio de cada continente.</li>
+<li>Para esto agrupamos por continente y por año y luego calculamos la esperanza de vida promedio usando la función mean</li>
+<li>De manera muy similiar a geom_bar, lo que hacemos es setear en la función aes al eje x como año y al eje y como la esperanza de vida promedio.</li>
+<li>Agregamos un tercer argumento en aes llamado color para que cada continente tenga un color y se genere una leyenda.</li>
+<li>Finalmente, usamos geom_line para decirle a ggplot que queremos hacer una gráfico de líneas</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="visualización-de-datos-con-ggplot-7" class="slide level2">
+<h2>Visualización de datos con ggplot</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Hacer gráficos de puntos o scatterplot usando geom_ponit()</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1"></a>gapminder <span class="sc">%&gt;%</span> </span>
+<span id="cb76-2"><a href="#cb76-2"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb76-3"><a href="#cb76-3"></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(gdpPercap), <span class="at">y =</span> lifeExp) <span class="sc">+</span></span>
+<span id="cb76-4"><a href="#cb76-4"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-33-1.png" width="960"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="visualización-de-datos-con-ggplot-8" class="slide level2">
+<h2>Visualización de datos con ggplot</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Hacer gráficos de puntos o scatterplot usando geom_ponit()</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1"></a>gapminder <span class="sc">%&gt;%</span> </span>
+<span id="cb77-2"><a href="#cb77-2"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2007</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb77-3"><a href="#cb77-3"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb77-4"><a href="#cb77-4"></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(gdpPercap), <span class="at">y =</span> lifeExp, <span class="at">color=</span>continent) <span class="sc">+</span></span>
+<span id="cb77-5"><a href="#cb77-5"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-34-1.png" width="960"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="visualización-de-datos-con-ggplot-9" class="slide level2">
+<h2>Visualización de datos con ggplot</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Usando facet_wrap()</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1"></a>gapminder <span class="sc">%&gt;%</span> </span>
+<span id="cb78-2"><a href="#cb78-2"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb78-3"><a href="#cb78-3"></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(gdpPercap), <span class="at">y =</span> lifeExp, <span class="at">color=</span>continent) <span class="sc">+</span></span>
+<span id="cb78-4"><a href="#cb78-4"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb78-5"><a href="#cb78-5"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>continent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-35-1.png" width="960"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="ejercicio-3" class="slide level2">
+<h2>Ejercicio 3</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Importe el archivo excel “vuelos.xlsx” de la carpeta data y guárdelo como “vuelos”.</li>
+<li class="fragment">Genere un gráfico de barras simple que cuente el número de veces que aparece cada aerolínea usando el dataframe “vuelos”.</li>
+<li class="fragment">Para generar el siguiente gráfico de barras, agrupe el dataframe por “aerolínea” y usando la función summarise() calcule la distancia promedio, llamando a esta variable “dist_prom”. Utilice ggplot para generar un gráfico de barras donde el largo del eje y sea la distancia promedio de cada aerolínea.</li>
+<li class="fragment">Genere un gráfico de líneas agrupando el dataframe por “mes” y “origen”, y usando la función summarise() calcule el tiempo de vuelo promedio, llamando a esta variable “tiempo_prom”. Utilice ggplot para generar un gráfico de líneas donde el eje x sea el “mes” y el eje y sea “tiempo_prom”. Agregue el parámetro color = origen dentro de aes() para que cada línea tenga su color.</li>
+<li class="fragment">Filtre las filas del dataframe “vuelos” donde destino sea igual a “ATL” y replique el siguiente gráfico:</li>
+</ul>
+</div>
+</section>
+<section id="ejercicio-3-1" class="slide level2">
+<h2>Ejercicio 3</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-36-1.png" width="960"></p>
+</div>
+</div>
+</section>
+<section id="solución-ejercicio-3" class="slide level2">
+<h2>Solución ejercicio 3</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Importe el archivo excel “vuelos.xlsx” de la carpeta data y guárdelo como “vuelos”.</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb79-2"><a href="#cb79-2"></a>vuelos <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/vuelos.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="solución-ejercicio-3-1" class="slide level2">
+<h2>Solución ejercicio 3</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Genere un gráfico de barras simple que cuente el número de veces que aparece cada aerolínea usando el dataframe “vuelos”.</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1"></a>vuelos <span class="sc">%&gt;%</span> </span>
+<span id="cb80-2"><a href="#cb80-2"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb80-3"><a href="#cb80-3"></a>  <span class="fu">aes</span>(<span class="at">x =</span> aerolinea) <span class="sc">+</span></span>
+<span id="cb80-4"><a href="#cb80-4"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-38-1.png" width="960"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="solución-ejercicio-3-2" class="slide level2">
+<h2>Solución ejercicio 3</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Para generar el siguiente gráfico de barras, agrupe el dataframe por “aerolínea” y usando la función summarise() calcule la distancia promedio, llamando a esta variable “dist_prom”. Utilice ggplot para generar un gráfico de barras donde el largo del eje y sea la distancia promedio de cada aerolínea.</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1"></a>vuelos <span class="sc">%&gt;%</span> </span>
+<span id="cb81-2"><a href="#cb81-2"></a>  <span class="fu">group_by</span>(aerolinea) <span class="sc">%&gt;%</span> </span>
+<span id="cb81-3"><a href="#cb81-3"></a>  <span class="fu">summarise</span>(<span class="at">dist_prom =</span> <span class="fu">mean</span>(distancia, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb81-4"><a href="#cb81-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb81-5"><a href="#cb81-5"></a>  <span class="fu">aes</span>(<span class="at">x =</span> aerolinea, <span class="at">y =</span> dist_prom) <span class="sc">+</span></span>
+<span id="cb81-6"><a href="#cb81-6"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-39-1.png" width="960"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="solución-ejercicio-3-3" class="slide level2">
+<h2>Solución ejercicio 3</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Genere un gráfico de líneas agrupando el dataframe por “mes” y “origen”, y usando la función summarise() calcule el tiempo de vuelo promedio, llamando a esta variable “tiempo_prom”. Utilice ggplot para generar un gráfico de líneas donde el eje x sea el “mes” y el eje y sea “tiempo_prom”. Agregue el parámetro color = origen dentro de aes() para que cada línea tenga su color.</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1"></a>vuelos <span class="sc">%&gt;%</span> </span>
+<span id="cb82-2"><a href="#cb82-2"></a>  <span class="fu">group_by</span>(mes, origen) <span class="sc">%&gt;%</span> </span>
+<span id="cb82-3"><a href="#cb82-3"></a>  <span class="fu">summarise</span>(<span class="at">tiempo_prom =</span> <span class="fu">mean</span>(tiempo_vuelo, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb82-4"><a href="#cb82-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb82-5"><a href="#cb82-5"></a>  <span class="fu">aes</span>(<span class="at">x =</span> mes, <span class="at">y =</span> tiempo_prom, <span class="at">color =</span> origen) <span class="sc">+</span></span>
+<span id="cb82-6"><a href="#cb82-6"></a>  <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-40-1.png" width="960"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="solución-ejercicio-3-4" class="slide level2">
+<h2>Solución ejercicio 3</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Filtre las filas del dataframe “vuelos” donde destino sea igual a “ATL” y replique el siguiente gráfico:</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1"></a>vuelos <span class="sc">%&gt;%</span> </span>
+<span id="cb83-2"><a href="#cb83-2"></a>  <span class="fu">filter</span>(destino <span class="sc">==</span> <span class="st">"ATL"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb83-3"><a href="#cb83-3"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb83-4"><a href="#cb83-4"></a>  <span class="fu">aes</span>(<span class="at">x =</span> atraso_salida, <span class="at">y =</span> atraso_llegada, <span class="at">color =</span> origen) <span class="sc">+</span></span>
+<span id="cb83-5"><a href="#cb83-5"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb83-6"><a href="#cb83-6"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>origen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-41-1.png" width="960"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="tarea-3" class="slide level2">
+<h2>Tarea 3</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">La <strong>Encuesta Mensual de Alojamiento Turístico (EMAT)</strong> tiene como objetivo general estimar mensualmente la evolución de la actividad económica desarrollada por los establecimientos de alojamiento turístico (EAT); con representación a nivel nacional, regional y por destino turístico.</li>
+<li class="fragment">Para esta tarea usaremos la base de esta encuesta, cuyas variables son las siguientes:
+<ul>
+<li class="fragment"><strong>mes</strong>: mes de funcionamiento del establecimiento.</li>
+<li class="fragment"><strong>anio</strong>: año de funcionamiento del establecimiento.</li>
+<li class="fragment"><strong>fecha</strong>: fecha de funcionamiento del establecimiento.</li>
+<li class="fragment"><strong>clase</strong>: establecimiento clasificado como Hotel (hotel y apart-hotel), y Otros (hostales, hosterías, residenciales, cabañas y similares).</li>
+<li class="fragment"><strong>region</strong>: nombre de la región.</li>
+<li class="fragment"><strong>total_llegadas_exp</strong>: número total de pasajeros con residencia en Chile y en el extranjero que llegan a establecimientos de alojamiento turístico (expandido).</li>
+<li class="fragment"><strong>total_pernoctaciones_exp</strong>: número total de noches que los pasajeros con residencia en Chile y en el extranjero alojan en el establecimiento de alojamiento turístico (expandido).</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="tarea-3-1" class="slide level2">
+<h2>Tarea 3</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Importe el archivo excel “emat.xlsx” de la carpeta data y asígnelo como “emat”.</li>
+<li class="fragment">Agrupe el dataframe “emat” por “anio” y “region”, y calcule la suma del total de pernoctaciones expandidas utilizando el comando <code>summarise(suma_pernoctaciones = sum(total_pernoctaciones_exp))</code>. Utilice <code>pivot_wider()</code> para transformar el dataframe a formato ancho, usando como nombres de las columnas el “anio” y los valores “suma_pernoctaciones”. Utilice el argumento <code>names_prefix = "pernoctaciones_"</code> para asignarle un prefijo al nombre de las columnas. Almacene este dataframe como “pernoctaciones_wide”.</li>
+<li class="fragment">Agrupe el dataframe “emat” por “anio” y “region”, y calcule la suma del total de llegadas expandidas utilizando el comando <code>summarise(suma_llegadas = sum(total_llegadas_exp))</code>. Utilice <code>pivot_wider()</code> para transformar el dataframe a formato ancho, usando como nombres de las columnas el “anio” y los valores “suma_llegadas”. Utilice el argumento <code>names_prefix = "llegadas_"</code> para asignarle un prefijo al nombre de las columnas. Almacene este dataframe como “llegadas_wide”.</li>
+<li class="fragment">Haga un <code>left_join()</code> usando “pernoctaciones_wide” y “llegadas_wide” usando como variable llave “region”.</li>
+<li class="fragment">Genere los siguientes gráficos:</li>
+</ul>
+</div>
+</section>
+<section id="tarea-3-gráfico-1" class="slide level2">
+<h2>Tarea 3: gráfico 1</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Filtre el dataframe “emat” donde el año sea igual al 2018.</li>
+<li class="fragment">Luego, agrupe el dataframe por la variable “region” y calcule la suma de llegadas expandidas usando el comando <code>summarise(suma_llegadas = sum(total_llegadas_exp))</code>.<br>
+</li>
+<li class="fragment">Finalmente, genere un gráfico de barras mapeando en el eje x la suma de llegadas y en el eje y las regiones.</li>
+<li class="fragment">El gráfico debería quedarle así:</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-42-1.png" width="960"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="tarea-3-gráfico-2" class="slide level2">
+<h2>Tarea 3: gráfico 2</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Utilizando la función mutate() convierta la variable “anio” a tipo factor, usando el comando <code>mutate(anio = as.factor(anio))</code>.</li>
+<li class="fragment">Luego filtre por las filas donde la clase sea distinto a NA, usando el comando <code>filter(!is.na(clase))</code>.</li>
+<li class="fragment">Agrupe por “clase” y “anio”, y usando <code>summarise()</code> calcule la suma del total de pernoctaciones expandido. Llame a esta variable “suma_pernoctaciones”.</li>
+<li class="fragment">Genere un gráfico de barras mapeando en el eje x “clase” y en el eje y “suma_pernoctaciones”.</li>
+<li class="fragment">El color de cada barra debe correspender al año y las barras deben quedar una al lado de la otra.</li>
+<li class="fragment">Agregue títulos a los ejes y al gráfico.</li>
+<li class="fragment">El gráfico debería quedarle así:</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-43-1.png" width="960"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="tarea-3-gráfico-3" class="slide level2">
+<h2>Tarea 3: gráfico 3</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Filtre el dataframe “emat” donde el año sea igual al 2017.</li>
+<li class="fragment">Genere un gráfico de puntos o scatterplot mapeando en el eje x “total_pernoctaciones_exp” y en el eje y “total_llegadas_exp”.</li>
+<li class="fragment">El gráfico debería quedarle así:</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-44-1.png" width="960"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="tarea-3-gráfico-4" class="slide level2">
+<h2>Tarea 3: gráfico 4</h2>
+<div class="small-par">
+<ul>
+<li class="fragment">Filtre el dataframe “emat” por las filas donde la clase sea distinto a NA, usando el comando <code>filter(!is.na(clase))</code>.</li>
+<li class="fragment">Agrupe por “fecha” y “clase”, y calcule la suma de “total_llegadas_exp” usando <code>summarise()</code>. Llame a esta variable “suma_llegadas”.</li>
+<li class="fragment">Genere un gráfico de líneas mapeando en el eje x “fecha” y en el eje y “suma_llegadas”. Adicionalmente, agregue el parámetro color para que cada línea tenga un color distinto según la clase.</li>
+<li class="fragment">El gráfico debería quedarle así:</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-45-1.png" width="960"></p>
+</div>
 </div>
 <p><img src="imagenes/logo_portada2.png" class="slide-logo"></p>
 <div class="footer footer-default">
 
+</div>
 </div>
 </section></section>
     </div>

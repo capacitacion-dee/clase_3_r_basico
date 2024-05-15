@@ -50,7 +50,7 @@ format:
 - Visualización de datos con ggplot
 :::
 
-## Estructuración de tablas: pivot_longer
+## Estructuración de tablas
 
 ::: {.incremental .small-par}
 - En ocasiones necesitamos transformar el formato de nuestros dataframes, desde **wide** a **long**, o viceversa.
@@ -62,10 +62,10 @@ format:
 #| echo: FALSE
 #| eval: TRUE
 ventas_wide <- data.frame(producto = c("A", "B", "C"),
-                     `2018` = c(100, 150, 200),
-                     `2019` = c(120, 180, 220),
-                     `2020` = c(130, 160, 210),
-                     check.names=FALSE)
+                          `2018` = c(100, 150, 200),
+                          `2019` = c(120, 180, 220),
+                          `2020` = c(130, 160, 210),
+                          check.names=FALSE)
 
 ```
 
@@ -81,11 +81,10 @@ ventas_wide
 - Este es un ejemplo de un DataFrame en formato wide porque las variables están dispuestas en columnas separadas.
 :::
 
-## Estructuración de tablas: pivot_longer
+## Estructuración de tablas
 
 ::: {.incremental .small-par}
-- Un dataframe en formato **long** (largo) contiene valores que si se repiten en la primera columna y hay una columna adicional que identifica la variable a la que corresponde cada observación.
-es un tipo de organización de datos en el que cada fila representa una observación única y cada variable tiene su propia columna. En otras palabras, hay una sola columna para todas las observaciones de una variable y una columna adicional que identifica la variable.
+- Un DataFrame en formato **long** (largo) es un tipo de organización de datos en el que cada fila representa una observación única y cada variable tiene su propia columna. En otras palabras, hay una sola columna para todas las observaciones de una variable y una columna adicional que identifica la variable.
 - Es común cuando se quiere facilitar el manejo y análisis de datos, especialmente para operaciones como agregaciones, visualizaciones y análisis estadísticos.
 :::
 . . .
@@ -95,10 +94,10 @@ es un tipo de organización de datos en el que cada fila representa una observac
 library(dplyr)
 library(tidyr)
 ventas_long <- data.frame(producto = c("A", "B", "C"),
-                     `2018` = c(100, 150, 200),
-                     `2019` = c(120, 180, 220),
-                     `2020` = c(130, 160, 210),
-                     check.names=FALSE) %>% 
+                          `2018` = c(100, 150, 200),
+                          `2019` = c(120, 180, 220),
+                          `2020` = c(130, 160, 210),
+                          check.names=FALSE) %>% 
   pivot_longer(cols = -producto, names_to = "anio", values_to = "ventas")
 
 ```
@@ -110,18 +109,780 @@ ventas_long <- data.frame(producto = c("A", "B", "C"),
 ventas_long
 ```
 ::: notes
-- En este ejemplo, vemos que cada fila representa una observación única, en este caso las ventas de un producto en un año específico. Las columnas son Producto, Año y Ventas. 
-- En el formato long, hay una sola columna para las ventas, y otra columna (Año) que identifica el año correspondiente a cada observación.
+- En este DataFrame, cada fila representa una observación única, en este caso las ventas de un producto en un año específico. Las columnas son Producto, Año y Ventas. En el formato long, hay una sola columna para las ventas, y otra columna (Año) que identifica el año correspondiente a cada observación. 
+- En este ejemplo ambos formatos contienen la misma información pero en formatos diferentes.
 :::
 
 ## Estructuración de tablas: pivot_longer
 ::: {.incremental .small-par}
-- Veamos un ejemplo usando pivot_longer:
+- **Función pivot_longer()**: es una función del paquete "tidyr" utilizada para pivotear un datafreame de formato ancho a uno de formato largo.
+- Sus argumentos son:
+  - **data**: el dataframe a ser modificado.
+  - **cols**: el nombre de las columnas que se van a pivotear.
+  - **names_to**: el nombre de la nueva columna que contendrá los nombres de las categorías.
+  - **values_to**: el nombre de la nueva columna que contendrá los valores correspondientes a cada categoría.
+- Veamos cómo funciona:
+:::
+
+## Estructuración de tablas: pivot_longer
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+
+ventas_wide
+
+```
+
+. . .
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+library(dplyr)
+library(tidyr)
+
+ventas_long <- ventas_wide %>% 
+  pivot_longer(cols = -producto, names_to = "anio", values_to = "ventas")
+ventas_long
+
+```
+::: notes
+- En este ejemplo estamos convirtiendo ventas_wide a formato long usando pivot_longer()
+- En el parámetro cols especificamos las columnas que queremos pivotear o transformar
+- En este ejemplo, queremos transformar todas las columnas menos producto, por eso usamos el signo - para seleccionar todas las columnas menos producto, es decir, queremos pivotear las columnas 2018, 2019 y 2020 usando como llave o pivote la columna "producto"
+- En el argumento names_to especificamos el nombre de la nueva variable que contendrá los nombres de las columnas 2018, 2019 y 2020 pivoteadas
+- En el argumento values_to especificamos el nombre de la nueva variable que contenrá los valores de las columnas transformadas. En este caso, almacenará los valores de las ventas anuales de cada producto.
+:::
+
+## Estructuración de tablas: pivot_wider
+::: {.incremental .small-par}
+- **Función pivot_wider()**: es una función del paquete "tidyr" utilizada para pivotear un datafreame de formato largo a uno de formato ancho
+- Sus argumentos son:
+  - **data**: el dataframe a ser modificado.
+  - **names_from**: qué columnas se extenderán y cuyos valores se convertirán en nombres de nuevas columnas.
+  - **values_from**: qué columnas se utilizarán para llenar los valores en las nuevas columnas creadas por la extensión de la variable especificada en names_from.
+- Veamos cómo funciona:
+:::
+
+## Estructuración de tablas: pivot_wider
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+
+ventas_long
+
+```
+
+. . .
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+library(dplyr)
+library(tidyr)
+
+ventas_wide <- ventas_long %>% 
+  pivot_wider(names_from = anio, values_from = ventas, names_prefix = "anio_")
+ventas_wide
+
+```
+::: notes
+- Aquí, las ventas de cada producto se han extendido a través de los años, convirtiéndose en columnas separadas. Cada fila todavía representa un producto único, pero ahora tenemos una estructura de datos más ancha y fácil de interpretar.
+- names_prefix es un argumento opcional para agregar un prefijo a las columnas que se van a crear, en este caso estamos usando "anio_".
+- Esto lo hacemos porque es recomendable no nombrar las columnas como números sino que como un texto.
+:::
+
+## Ejercicio 1
+::: {.incremental .small-par}
+- Importe el archivo excel "encuesta.xlsx" de la carpeta data usando la función read_excel() del paquete "readxl", y guárdelo como "encuesta".
+- Agrupe el dataframe encuesta por las variables "anio" e "ingreso" y, usando un summarise(), calcule las horas_tv promedio usando la función mean(). Llame a esta variable "horas_prom". Almacene el dataframe resultante como "encuesta_agrupado". **Nota**: recuerde usar el argumento na.rm = TRUE para que no considere los valores NA.
+- Utilizando la función pivot_wider(), convierta el dataframe "encuesta_agrupado" a formato ancho. El nombre de las columnas debe ser el ingreso y los valores las horas de tv promedio. Almacene el dataframe resultante como "encuesta_wide"
+- Transforme el dataframe "encuesta_wide" a su estructura original, es decir, en formato long, usando pivot_longer(). El dataframe resultante debe ser igual a "encuesta_agrupado". Almacene este dataframe como "encuesta_long".
+:::
+
+## Solución ejercicio 1
+::: {.incremental .small-par}
+- Importe el archivo excel "encuesta.xlsx" de la carpeta data usando la función read_excel() del paquete "readxl", y guárdelo como "encuesta".
+:::
+. . .
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+library(readxl)
+encuesta <- read_excel("data/encuesta.xlsx")
+```
+
+## Solución ejercicio 1
+::: {.incremental .small-par}
+- Agrupe el dataframe encuesta por las variables "anio" e "ingreso" y, usando un summarise(), calcule las horas_tv promedio usando la función mean(). Llame a esta variable "horas_prom". Almacene el dataframe resultante como "encuesta_agrupado". **Nota**: recuerde usar el argumento na.rm = TRUE para que no considere los valores NA.
+:::
+. . .
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+encuesta_agrupado <- encuesta %>% 
+  group_by(anio, ingreso) %>% 
+  summarise(horas_prom = mean(horas_tv, na.rm = TRUE)) 
+encuesta_agrupado
+```
+
+## Solución ejercicio 1
+::: {.incremental .small-par}
+- Utilizando la función pivot_wider(), convierta el dataframe "encuesta_agrupado" a formato ancho. El nombre de las columnas debe ser el ingreso y los valores las horas de tv promedio. Almacene el dataframe resultante como "encuesta_wide"
+:::
+. . .
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+encuesta_wide <- encuesta_agrupado %>% 
+  pivot_wider(names_from = ingreso, values_from = horas_prom)
+encuesta_wide
+```
+
+## Solución ejercicio 1
+::: {.incremental .small-par}
+- Transforme el dataframe "encuesta_wide" a su estructura original, es decir, en formato long usando pivot_longer(). El dataframe resultante debe ser igual a "encuesta_agrupado". Almacene este dataframe como "encuesta_long".
+:::
+. . .
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+encuesta_long <- encuesta_wide %>% 
+  pivot_longer(cols = -anio, names_to = "ingreso", values_to = "horas_prom")
+encuesta_long
+```
+
+## Unión de tablas
+::: {.incremental .small-par}
+- Una tarea común en el análisis de datos es reunir diferentes conjuntos de datos, de modo que podamos combinar columnas de dos (o más) tablas.
+- Esto se puede lograr utilizando la familia de funciones join en dplyr. 
+- Existen diferentes tipos de uniones, que se pueden representar mediante una serie de diagramas de Venn:
+:::
+
+![](imagenes/Captura.PNG)
+
+::: notes
+- El inner_join devuelve solo las filas coincidentes de ambos marcos de datos, excluyendo las filas que no coinciden.
+- El left_join devuelve todas las filas del marco de datos izquierdo (o primero) y las filas coincidentes del marco de datos derecho (o segundo). Las filas que no coinciden en el marco de datos derecho se llenan con NA.
+- El right_join devuelve todas las filas del marco de datos derecho (o segundo) y las filas coincidentes del marco de datos izquierdo (o primero). Las filas que no coinciden en el marco de datos izquierdo se llenan con NA.
+- El full_join devuelve todas las filas de ambos marcos de datos, incluidas las filas coincidentes y no coincidentes. Las filas que no coinciden se rellenan con NA.
+- El anti_join devuelve solo las filas del primer marco de datos que no coinciden en el segundo conjunto de datos.
+:::
+
+## Unión de tablas: left_join
+
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+df1 <- data.frame(id = c(1, 2, 3, 4),
+                  nombre = c("Juan", "María", "Pedro", "Ana"),
+                  edad = c(25, 30, 28, 35))
+df1
+
+df2 <- data.frame(id = c(1, 2, 5),
+                  departamento = c("Ventas", "Marketing", "Recursos Humanos"))
+df2
+```
+
+## Unión de tablas: left_join
+
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+band_members
+
+band_instruments
+
+band_members %>% left_join(band_instruments, by = c("name"))
+```
+
+## Unión de tablas: left_join
+::: {.incremental .small-par}
+- Qué pasa si el nombre de las columnas identificadoras no son iguales?
+:::
+
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+band_members
+
+band_instruments2
+
+band_members %>% left_join(band_instruments2, by = c("name"="artist"))
+```
+
+## Unión de tablas: left_join
+::: {.incremental .small-par}
+- Qué pasa si necesitamos más de una variable identificadora?
+:::
+
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+# Conjunto de datos de ventas
+ventas <- data.frame(vendedor = c("Juan", "María", "Juan", "Pedro", "María", "Pedro"),
+                     departamento = c("Ventas", "Marketing", "Ventas", "Ventas", "Marketing", "Ventas"),
+                     ventas = c(100, 150, 200, 120, 180, 160))
+ventas
+# Conjunto de datos de vendedores
+vendedores <- data.frame(vendedor = c("Juan", "María", "Pedro"),
+                         departamento = c("Ventas", "Marketing", "Ventas"),
+                         experiencia = c(5, 7, 3))
+vendedores
+
+```
+::: notes
+- Hasta ahora hemos visto que para hacer un join necesitamos una variable identificadora. Esta es una variable o conjunto de variables que identifica de forma única cada observación.
+- En este ejemplo tenemos un dataframe llamado ventas que contiene las columnas vendedor, departamento y ventas. También tenemos un dataframe llamado vendedores con las columnas vendedor, departamento y experiencia. 
+- Queremos hacer un left_join de ventas con vendedores para obtener la columna experiencia.
+- Sin embargo, vemos que la columna vendedor del dataframe ventas no es un indentificador único de personas porque Juan, María y Pedro se repiten más de una vez en el dataframe. Pero si usamos la combinación vendedor y departamento podemos obtener combinaciones únicas de personas. Entonces al hacer el left_join usamos en el argumento by ambas columnas.
+:::
+
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+ventas %>% left_join(vendedores, by = c("vendedor","departamento"))
+```
+
+## Unión de tablas: right_join
+
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+band_members
+
+band_instruments
+
+band_members %>% right_join(band_instruments, by = c("name"))
+```
+
+## Unión de tablas: full_join
+
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+band_members
+
+band_instruments
+
+band_members %>% full_join(band_instruments, by = c("name"))
+```
+## Unión de tablas: anti_join
+
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+band_members
+
+band_instruments
+
+band_members %>% anti_join(band_instruments, by = c("name"))
+```
+## Ejercicio 2
+::: {.incremental .small-par}
+- Para este ejercicio usaremos varias bases provenientes del paquete "nycflights13".
+- Este paquete contiene 5 dataframes:
+  - **airlines**: contiene el nombre de cada aerolínea
+  - **airports**: contiene el nombre y localización de los aeropuertos
+  - **flights**: contiene información de todos los vuelos
+  - **planes**: información de construcción sobre cada uno de los aviones utilizados
+  - **weather**: datos meteorológicos por hora para cada uno de los tres aeropuertos de Nueva York
+- Estas bases se relacionan de la siguiente manera:
+::: 
+
+![](imagenes/vuelos.PNG)
+
+## Ejercicio 2
+::: {.incremental .small-par}
+- Instale y cargue el paquete "nycflights13". 
+- Del dataframe "flights" seleccione las columnas "time_hour", "origin", "dest", "tailnum" y "carrier". Almacene este resultado como "flights2".
+- Haga un left_join entre "flights2" y "airlines" usando la llave correspondiente.
+- Haga un left_join entre "flights2" y "planes" usando la llave correspondiente.
+- Haga un left_join entre "flights2" y "weather" usando las llaves correspondientes.
+- Haga un anti_join entre "flights2" y "planes" usando la llave correspondiente.
+:::
+
+## Solución ejercicio 2
+::: {.incremental .small-par}
+- Instale y cargue el paquete "nycflights13". 
+:::
+. . .
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+#install.packages("nycflights13")
+library(nycflights13)
+```
+
+## Solución ejercicio 2
+::: {.incremental .small-par}
+- Del dataframe "flights" seleccione las columnas "time_hour", "origin", "dest", "tailnum" y "carrier". Almacene este resultado como "flights2".
+:::
+. . .
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+flights2 <- flights %>% 
+  select(time_hour, origin, dest, tailnum, carrier)
+flights2
+```
+
+## Solución ejercicio 2
+::: {.incremental .small-par}
+- Haga un left_join entre "flights2" y "airlines" usando la llave correspondiente.
+:::
+. . .
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+flights2 %>% 
+  left_join(airlines, by = c("carrier"))
+```
+
+## Solución ejercicio 2
+::: {.incremental .small-par}
+- Haga un left_join entre "flights2" y "planes" usando la llave correspondiente.
+:::
+. . .
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+flights2 %>% 
+  left_join(planes, by = c("tailnum"))
+```
+::: notes
+- Acá podemos ver que el código de cola o tailnum N3ALAA tiene NA en las columnas que se pegaron porque no hay información acerca del avión con ese código de cola, es decir no hubo match, entonces esos valores se reemplazan por NA
+:::
+
+## Solución ejercicio 2
+::: {.incremental .small-par}
+- Haga un left_join entre "flights2" y "weather" usando las llaves correspondientes.
+:::
+. . .
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+flights2 %>% 
+  left_join(weather, by = c("time_hour", "origin"))
+```
+
+## Solución ejercicio 2
+::: {.incremental .small-par}
+- Haga un anti_join entre "flights2" y "planes" usando la llave correspondiente.
+:::
+. . .
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+flights2 %>% 
+  anti_join(planes, by = c("tailnum"))
+```
+
+::: notes
+- Acá el anti_join retorna todas las filas de flights2 que no hicieron match con planes. Esto nos permite conocer cuáles filas están siendo rellenadas con NA.
+:::
+
+## Visualización de datos con ggplot
+::: {.incremental .small-par}
+- ggplot2 es un paquete popular de visualización de datos en el lenguaje de programación R.
+- Permite a los usuarios crear una amplia variedad de gráficos estadísticos personalizables y de alta calidad, lo que lo convierte en una herramienta valiosa para la exploración y presentación de datos.
+- El término ggplot2 se relaciona con el nombre del paquete.
+- Usamos la función ggplot() para producir los gráficos cuando usamos el paquete. Por lo tanto, ggplot() es el comando y el paquete completo se llama ggplot2.
+- Los gráficos se componen de capas, cada una definida por su propio conjunto de reglas.
+:::
+![](imagenes/ggplot_capas.PNG)
+
+::: notes
+- Dentro de las capas más utilizadas tenemos:
+  - data: Esta es la capa base donde se especifican los datos que se utilizarán para crear el gráfico. 
+  - Estética: La estética controla cómo se visualizan los datos en el gráfico. Puedes mapear variables a propiedades visuales como color, forma, tamaño, etc., utilizando la función aes()
+  - Geometrías: Las geometrías determinan el tipo de gráfico que se creará
+  - Facetas (facet): Las facetas permiten dividir el gráfico en múltiples paneles, cada uno de los cuales muestra una porción de los datos. 
+  - La quinta capa es la capa de estadísticas, donde el paquete utiliza diferentes funciones estadísticas (por ejemplo, media, desviación estándar, recuentos, etc.) para producir nuevos valores que luego se pueden representar en el gráfico.
+  - La sexta capa trabaja con elementos conectados a las coordenadas del gráfico. Estas características son un poco más avanzadas. Pero, esta capa nos permite crear gráficos circulares, establecer el tamaño del gráfico e incluso ubicar elementos específicos, como etiquetas de texto, en partes específicas de un gráfico.
+  - La última capa incluye todos los elementos del tema.Sse utiliza para personalizar el aspecto visual del gráfico, como los ejes, la leyenda, los títulos, los márgenes y otras características relacionadas con el diseño y la apariencia del gráfico en general.
+:::
+
+## Visualización de datos con ggplot
+::: {.incremental .small-par}
+- Veamos cómo hacer un gráfico de barras simple usando geom_bar
+- Para esto usaremos la base llamada "gapminder"
+:::
+
+. . .
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+gapminder <- read_excel("data/gapminder.xlsx")
+summary(gapminder)
+```
+## Visualización de datos con ggplot
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+#install.packages("ggplot2")
+library(ggplot2)
+gapminder %>% 
+  filter(year==2007) %>% 
+  ggplot() +
+  aes(x = continent) +
+  geom_bar()
+```
+::: notes
+- Aquí, utilizamos el dataframe gapminder y filtramos para el año 2007. Luego usamos la función ggplot() para decirle a R que queremos generar un gráfico. De aquí en adelante utilizamos el signo + para ir añadiendo más capas al gráfico
+- Dentro de la función aes() (capa estétitca), estamos asignando la variable continente al eje x con x = continent. Hay 5 categorías en la variable continente y aparecen en el eje x del gráfico.
+- La función aes() nos permite asignar variables de nuestro dataframe a los atributos estéticos del gráfico.
+- geom_bar() (capa geométrica) especifica que queremos trazar un gráfico de barras.
+- Cuando creamos un gráfico de barras, siempre necesitamos asignar una variable categórica al eje x o y.
+- Acá no asignamos ninguna variable al eje y. Debido a esto, por defecto, ggplot simplemente contó el número de registros por categoría (es decir, por continente). Entonces, la longitud de la barra (el eje y, en este caso) representa el recuento del número de registros.
+- Por ejemplo, Oceanía tiene solamente dos registros en el 2007, que en este caso son dos países.
 :::
 
 
+## Visualización de datos con ggplot
+::: {.incremental .small-par}
+- Veamos cómo hacer un gráfico de barras seteando la longitud de la barra
+:::
+. . .
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+gapminder %>% 
+  filter(year==2007) %>%
+  group_by(continent) %>% 
+  summarise(gdpPercap_prom = mean(gdpPercap)) %>% 
+  ggplot() +
+  aes(x = continent, y = gdpPercap_prom) +
+  geom_bar(stat = "identity")
+```
+::: notes
+- Supongamos que queremos graficar el pib per cápita promedio de cada continente para el año 2007.
+- Nuevamente seteamos la variable categórica (continente) en el eje x.
+- Pero en esta visualización establecemos el eje y como el pib per cápita promedio, es decir, la longitud de la barra representa un valor contenido en una variable, en este caso, gdpPercap_prom
+- Adicionalmente, para que esto funcione, agregamos un parámetro adicional dentro de geom_bar llamado stat.
+- Al establecer stat = 'identity', le estamos diciendo a ggplot que en lugar de realizar una operación estadística (es decir, contar los registros), le estamos diciendo a ggplot que la longitud de la barra debe ser "idéntica" al valor de la variable numérica pib per capita promedio
+:::
+
+## Visualización de datos con ggplot
+::: {.incremental .small-par}
+- Podemos agregar más elementos como títulos, colores y etiquetas...
+:::
+. . .
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+gapminder %>% 
+  filter(year==2007) %>% 
+  group_by(continent) %>% 
+  summarise(gdpPercap_prom = mean(gdpPercap)) %>% 
+  mutate(gdpPercap_prom = round(gdpPercap_prom, 0)) %>% 
+  ggplot() +
+  aes(x = continent, y = gdpPercap_prom, label = gdpPercap_prom) +
+  geom_bar(stat = "identity", fill = "blue") +
+  labs(x = "Continente", y = "PIB per cápita promedio", title = "PIB per cápita promedio por continente (2017)") +
+  geom_label()
+```
+
+::: notes
+- Al gráfico anterior también podemos agregarle etiquetas, colores y títulos.
+- Por ejemplo, para agregar las etiquetas a las columnas se establece un tercer parámetro dentro de la función aes llamado label para decirle a ggplot que queremos que nuestras etiquetas sean el pib per cápita promedio.
+- Luego se añade la capa geom_label para que aparezcan las etiquetas sobre las barras.
+- Para setear un color a las barras debemos usar el parámetro fill dentro de geom_bar para que rellene con el color azul.
+- Finalmente, los títulos de los ejes y del gráfico se pueden establecer con la función labs.
+:::
 
 
+## Visualización de datos con ggplot
+::: {.incremental .small-par}
+- Colocando barras una al lado de la otra usando position = "dodge"
+:::
+. . .
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+gapminder %>% 
+  filter(year==1997 | year==2007) %>% 
+  filter(country %in% c("Chile", "Argentina", "Bolivia", "Brazil", "Colombia")) %>% 
+  mutate(pop = pop/1000,
+         year = as.factor(year)) %>% 
+  ggplot() +
+  aes(x = country, y = pop, fill = year) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "País", y = "Población (en miles)")
+```
+::: notes
+- En este ejemplo filtramos la base para los años 1997 y 2007. Luego seleccionamos los países Chile, Argentina, Bolivia, Brazil y Colombia. Luego usando un mutate modificamos la variable población como población dividido en mil, y convertimos el año en una variable tipo factor (esto lo hacemos para que al gráficar ggplot no tome la variable como una variable númerica contínua, sino que como una variable categórica que puede tomar dos valores 1997 y 2007)
+- Usamos la función ggplot para decirle a R que queremos hacer un gráfico.
+- Con aes le decimos que queremos que en el eje x aparezcan los países y en el eje y el valor de la población, y usando fill = year le decimos que queremos que rellene las barras según el año.
+- En geom_bar asignamos stat = "identity" para que el largo de las barras sea exactamente el valor de la población y se agrega un parámetro adicional llamado position para establecer que las barras queden una al lado de la otra y no una encima de la otra que es lo hace por defecto si no establecemos este parámetro.
+:::
 
 
+## Visualización de datos con ggplot
+::: {.incremental .small-par}
+- Hacer gráficos de líneas usando geom_line()
+:::
+. . .
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+gapminder %>%
+  group_by(continent, year) %>%
+  summarise(lifeExp_prom = mean(lifeExp)) %>%
+  ggplot(aes(x=year, y=lifeExp_prom, color=continent)) +
+  geom_line(size = 1)
+```
+::: notes
+- En este ejemplo queremos gráficar la serie histórica de la esperanza de vida promedio de cada continente.
+- Para esto agrupamos por continente y por año y luego calculamos la esperanza de vida promedio usando la función mean
+- De manera muy similiar a geom_bar, lo que hacemos es setear en la función aes al eje x como año y al eje y como la esperanza de vida promedio.
+- Agregamos un tercer argumento en aes llamado color para que cada continente tenga un color y se genere una leyenda.
+- Finalmente, usamos geom_line para decirle a ggplot que queremos hacer una gráfico de líneas
+:::
 
+## Visualización de datos con ggplot
+::: {.incremental .small-par}
+- Hacer gráficos de puntos o scatterplot usando geom_ponit()
+:::
+. . .
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+gapminder %>% 
+  ggplot() +
+  aes(x = log(gdpPercap), y = lifeExp) +
+  geom_point()
+```
+
+## Visualización de datos con ggplot
+::: {.incremental .small-par}
+- Hacer gráficos de puntos o scatterplot usando geom_ponit()
+:::
+. . .
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+gapminder %>% 
+  filter(year == 2007) %>% 
+  ggplot() +
+  aes(x = log(gdpPercap), y = lifeExp, color=continent) +
+  geom_point()
+```
+
+## Visualización de datos con ggplot
+::: {.incremental .small-par}
+- Usando facet_wrap()
+:::
+. . .
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+gapminder %>% 
+  ggplot() +
+  aes(x = log(gdpPercap), y = lifeExp, color=continent) +
+  geom_point() +
+  facet_wrap(~continent)
+```
+
+## Ejercicio 3
+::: {.incremental .small-par}
+- Importe el archivo excel "vuelos.xlsx" de la carpeta data y guárdelo como "vuelos".
+- Genere un gráfico de barras simple que cuente el número de veces que aparece cada aerolínea usando el dataframe "vuelos".
+- Para generar el siguiente gráfico de barras, agrupe el dataframe por "aerolínea" y usando la función summarise() calcule la distancia promedio, llamando a esta variable "dist_prom". Utilice ggplot para generar un gráfico de barras donde el largo del eje y sea la distancia promedio de cada aerolínea.
+- Genere un gráfico de líneas agrupando el dataframe por "mes" y "origen", y usando la función summarise() calcule el tiempo de vuelo promedio, llamando a esta variable "tiempo_prom". Utilice ggplot para generar un gráfico de líneas donde el eje x sea el "mes" y el eje y sea "tiempo_prom". Agregue el parámetro color = origen dentro de aes() para que cada línea tenga su color.
+- Filtre las filas del dataframe "vuelos" donde destino sea igual a "ATL" y replique el siguiente gráfico:
+:::
+
+## Ejercicio 3
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+library(readxl)
+vuelos <- read_excel("data/vuelos.xlsx")
+vuelos %>% 
+  filter(destino == "ATL") %>% 
+  ggplot() +
+  aes(x = atraso_salida, y = atraso_llegada, color = origen) +
+  geom_point()+
+  facet_wrap(~origen)
+```
+
+## Solución ejercicio 3
+::: {.incremental .small-par}
+- Importe el archivo excel "vuelos.xlsx" de la carpeta data y guárdelo como "vuelos".
+:::
+. . .
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+library(readxl)
+vuelos <- read_excel("data/vuelos.xlsx")
+```
+
+## Solución ejercicio 3
+::: {.incremental .small-par}
+- Genere un gráfico de barras simple que cuente el número de veces que aparece cada aerolínea usando el dataframe "vuelos".
+::: 
+. . .
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+vuelos %>% 
+  ggplot() +
+  aes(x = aerolinea) +
+  geom_bar()
+```
+
+## Solución ejercicio 3
+::: {.incremental .small-par}
+- Para generar el siguiente gráfico de barras, agrupe el dataframe por "aerolínea" y usando la función summarise() calcule la distancia promedio, llamando a esta variable "dist_prom". Utilice ggplot para generar un gráfico de barras donde el largo del eje y sea la distancia promedio de cada aerolínea.
+::: 
+. . .
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+vuelos %>% 
+  group_by(aerolinea) %>% 
+  summarise(dist_prom = mean(distancia, na.rm = TRUE)) %>% 
+  ggplot() +
+  aes(x = aerolinea, y = dist_prom) +
+  geom_bar(stat = "identity")
+```
+
+## Solución ejercicio 3
+::: {.incremental .small-par}
+- Genere un gráfico de líneas agrupando el dataframe por "mes" y "origen", y usando la función summarise() calcule el tiempo de vuelo promedio, llamando a esta variable "tiempo_prom". Utilice ggplot para generar un gráfico de líneas donde el eje x sea el "mes" y el eje y sea "tiempo_prom". Agregue el parámetro color = origen dentro de aes() para que cada línea tenga su color.
+::: 
+. . .
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+vuelos %>% 
+  group_by(mes, origen) %>% 
+  summarise(tiempo_prom = mean(tiempo_vuelo, na.rm = TRUE)) %>% 
+  ggplot() +
+  aes(x = mes, y = tiempo_prom, color = origen) +
+  geom_line()
+```
+
+## Solución ejercicio 3
+::: {.incremental .small-par}
+- Filtre las filas del dataframe "vuelos" donde destino sea igual a "ATL" y replique el siguiente gráfico:
+::: 
+. . .
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+vuelos %>% 
+  filter(destino == "ATL") %>% 
+  ggplot() +
+  aes(x = atraso_salida, y = atraso_llegada, color = origen) +
+  geom_point()+
+  facet_wrap(~origen)
+```
+
+## Tarea 3
+::: {.incremental .small-par}
+- La **Encuesta Mensual de Alojamiento Turístico (EMAT)** tiene como objetivo general estimar mensualmente la evolución de la actividad económica desarrollada por los establecimientos de alojamiento turístico (EAT); con representación a nivel nacional, regional y por destino turístico. 
+- Para esta tarea usaremos la base de esta encuesta, cuyas variables son las siguientes:
+  - **mes**: mes de funcionamiento del establecimiento.
+  - **anio**: año de funcionamiento del establecimiento.
+  - **fecha**: fecha de funcionamiento del establecimiento.
+  - **clase**: establecimiento clasificado como Hotel (hotel y apart-hotel), y Otros (hostales, hosterías, residenciales, cabañas y similares).
+  - **region**: nombre de la región.
+  - **total_llegadas_exp**: número total de pasajeros con residencia en Chile y en el extranjero que llegan a establecimientos de alojamiento turístico (expandido).
+  - **total_pernoctaciones_exp**: número total de noches que los pasajeros con residencia en Chile y en el extranjero alojan en el establecimiento de alojamiento turístico (expandido).
+:::
+
+## Tarea 3
+::: {.incremental .small-par}
+- Importe el archivo excel "emat.xlsx" de la carpeta data y asígnelo como "emat".
+- Agrupe el dataframe "emat" por "anio" y "region", y calcule la suma del total de pernoctaciones expandidas utilizando el comando `summarise(suma_pernoctaciones = sum(total_pernoctaciones_exp))`. Utilice `pivot_wider()` para transformar el dataframe a formato ancho, usando como nombres de las columnas el "anio" y los valores "suma_pernoctaciones". Utilice el argumento `names_prefix = "pernoctaciones_"` para asignarle un prefijo al nombre de las columnas. Almacene este dataframe como "pernoctaciones_wide".
+- Agrupe el dataframe "emat" por "anio" y "region", y calcule la suma del total de llegadas expandidas utilizando el comando `summarise(suma_llegadas = sum(total_llegadas_exp))`. Utilice `pivot_wider()` para transformar el dataframe a formato ancho, usando como nombres de las columnas el "anio" y los valores "suma_llegadas". Utilice el argumento `names_prefix = "llegadas_"` para asignarle un prefijo al nombre de las columnas. Almacene este dataframe como "llegadas_wide".
+- Haga un `left_join()` usando "pernoctaciones_wide" y "llegadas_wide" usando como variable llave "region".
+- Genere los siguientes gráficos:
+:::
+
+## Tarea 3: gráfico 1
+::: {.incremental .small-par}
+- Filtre el dataframe "emat" donde el año sea igual al 2018. 
+- Luego, agrupe el dataframe por la variable "region" y calcule la suma de llegadas expandidas usando el comando `summarise(suma_llegadas = sum(total_llegadas_exp))`.  
+- Finalmente, genere un gráfico de barras mapeando en el eje x la suma de llegadas y en el eje y las regiones. 
+- El gráfico debería quedarle así:
+:::
+. . .
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+library(readr)
+emat <- read_excel("data/emat.xlsx")
+emat %>% 
+  filter(anio == 2018) %>% 
+  group_by(region) %>% 
+  summarise(suma_llegadas = sum(total_llegadas_exp)) %>% 
+  ggplot() +
+  aes(x = suma_llegadas, y = region) +
+  geom_bar(stat = "identity")
+```
+
+## Tarea 3: gráfico 2
+::: {.incremental .small-par}
+- Utilizando la función mutate() convierta la variable "anio" a tipo factor, usando el comando `mutate(anio = as.factor(anio))`. 
+- Luego filtre por las filas donde la clase sea distinto a NA, usando el comando `filter(!is.na(clase))`. 
+- Agrupe por "clase" y "anio", y usando `summarise()` calcule la suma del total de pernoctaciones expandido. Llame a esta variable "suma_pernoctaciones". 
+- Genere un gráfico de barras mapeando en el eje x "clase" y en el eje y "suma_pernoctaciones".
+- El color de cada barra debe correspender al año y las barras deben quedar una al lado de la otra.
+- Agregue títulos a los ejes y al gráfico.
+- El gráfico debería quedarle así:
+:::
+. . .
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+emat %>% 
+  mutate(anio = as.factor(anio)) %>% 
+  filter(!is.na(clase)) %>% 
+  group_by(clase, anio) %>% 
+  summarise(suma_pernoctaciones = sum(total_pernoctaciones_exp)) %>% 
+  ggplot() +
+  aes(x = clase, y = suma_pernoctaciones, fill = anio) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Clase", y = "Total llegadas", title = "Total llegadas por clase y por año")
+```
+
+## Tarea 3: gráfico 3
+::: {.incremental .small-par}
+- Filtre el dataframe "emat" donde el año sea igual al 2017.
+- Genere un gráfico de puntos o scatterplot mapeando en el eje x "total_pernoctaciones_exp" y en el eje y "total_llegadas_exp".
+- El gráfico debería quedarle así:
+:::
+. . .
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+emat %>% 
+  filter(anio == 2017) %>% 
+  ggplot() +
+  aes(x = total_pernoctaciones_exp, y = total_llegadas_exp) +
+  geom_point()
+```
+
+
+## Tarea 3: gráfico 4
+::: {.incremental .small-par}
+- Filtre el dataframe "emat" por las filas donde la clase sea distinto a NA, usando el comando `filter(!is.na(clase))`.
+- Agrupe por "fecha" y "clase", y calcule la suma de "total_llegadas_exp" usando `summarise()`.  Llame a esta variable "suma_llegadas". 
+- Genere un gráfico de líneas mapeando en el eje x "fecha" y en el eje y "suma_llegadas". Adicionalmente, agregue el parámetro color para que cada línea tenga un color distinto según la clase.
+- El gráfico debería quedarle así:
+:::
+. . .
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+emat %>% 
+  filter(!is.na(clase)) %>% 
+  group_by(fecha, clase) %>% 
+  summarise(suma_llegadas = sum(total_llegadas_exp)) %>% 
+  ggplot() +
+  aes(x = fecha, y = suma_llegadas, color = clase) +
+  geom_line(size = 1)
+```
