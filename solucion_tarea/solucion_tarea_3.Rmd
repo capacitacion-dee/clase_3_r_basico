@@ -1,0 +1,241 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+<!-- Beginning title page -->
+
+---
+title: ""
+output:
+  pdf_document:
+    number_sections: TRUE
+geometry: "left = 2.5cm, right = 2cm, top = 2cm, bottom = 2cm"
+fontsize: 11pt
+header-includes:
+  - \usepackage{graphicx}
+  - \usepackage{float}
+  - \usepackage{sectsty}
+  - \usepackage{paralist}
+  - \usepackage{setspace}
+  - \usepackage{fancyhdr}
+  - \usepackage{lastpage}
+  - \usepackage{dcolumn}
+  - \usepackage[nottoc, numbib]{tocbibind}
+  - \usepackage{xcolor}
+  - \usepackage{listings}
+  - \lstset{
+      language=R,
+      basicstyle=\ttfamily,
+      commentstyle=\color{red}\itshape,
+      frame=none
+    }
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(echo = TRUE)
+options(tinytex.verbose = TRUE)
+```
+
+\allsectionsfont{\centering}
+\subsectionfont{\raggedright}
+\subsubsectionfont{\raggedright}
+
+\pagenumbering{gobble}
+
+\begin{centering}
+
+\vspace{3cm}
+
+\vspace{1.5cm}
+
+\Large
+{\textbf Instituto Nacional de Estadisticas}
+
+\Large
+{\textbf Subdireccion Tecnica}
+
+\vspace{1.5 cm}
+
+\doublespacing
+{\Huge \textbf Capacitación en R y herramientas de productividad - Nivel básico}
+
+\vspace{.5 cm}
+
+{\Huge \textbf Solución Tarea 3}
+
+\vspace{1.5 cm}
+
+\end{centering}
+
+<!-- End title page -->
+
+- La **Encuesta Mensual de Alojamiento Turístico (EMAT)** tiene como objetivo general estimar mensualmente la evolución de la actividad económica desarrollada por los establecimientos de alojamiento turístico (EAT); con representación a nivel nacional, regional y por destino turístico. 
+- Para esta tarea usaremos la base de esta encuesta, cuyas variables son las siguientes:
+  - **mes**: mes de funcionamiento del establecimiento.
+  - **anio**: año de funcionamiento del establecimiento.
+  - **fecha**: fecha de funcionamiento del establecimiento.
+  - **clase**: establecimiento clasificado como Hotel (hotel y apart-hotel), y Otros (hostales, hosterías, residenciales, cabañas y similares).
+  - **region**: nombre de la región.
+  - **total_llegadas_exp**: número total de pasajeros con residencia en Chile y en el extranjero que llegan a establecimientos de alojamiento turístico (expandido).
+  - **total_pernoctaciones_exp**: número total de noches que los pasajeros con residencia en Chile y en el extranjero alojan en el establecimiento de alojamiento turístico (expandido).
+- El plazo para recibir retroalimentación de esta tarea es de dos semanas.
+
+## Ejercicio 1
+
+Importe el archivo excel "emat.xlsx" de la carpeta data y asígnelo como "emat".
+
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+#| warning: FALSE
+#| message: FALSE
+library(readxl)
+
+emat <- read_excel("emat.xlsx")
+
+```
+## Ejercicio 2
+
+Agrupe el dataframe "emat" por "anio" y "region", y calcule la suma del total de pernoctaciones expandidas utilizando el comando `summarise(suma_pernoctaciones = sum(total_pernoctaciones_exp))`. Utilice `pivot_wider()` para transformar el dataframe a formato ancho, usando como nombres de las columnas el "anio" y los valores "suma_pernoctaciones". Utilice el argumento `names_prefix = "pernoctaciones_"` para asignarle un prefijo al nombre de las columnas. Almacene este dataframe como "pernoctaciones_wide".
+
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+#| warning: FALSE
+#| message: FALSE
+library(dplyr)
+library(tidyr)
+
+pernoctaciones_wide <- emat %>% 
+  group_by(anio, region) %>% 
+  summarise(suma_pernoctaciones = sum(total_pernoctaciones_exp)) %>% 
+  pivot_wider(names_from = anio, 
+              values_from = suma_pernoctaciones, 
+              names_prefix = "pernoctaciones_")
+
+pernoctaciones_wide
+
+```
+## Ejercicio 3
+
+Agrupe el dataframe "emat" por "anio" y "region", y calcule la suma del total de llegadas expandidas utilizando el comando `summarise(suma_llegadas = sum(total_llegadas_exp))`. Utilice `pivot_wider()` para transformar el dataframe a formato ancho, usando como nombres de las columnas el "anio" y los valores "suma_llegadas". Utilice el argumento `names_prefix = "llegadas_"` para asignarle un prefijo al nombre de las columnas. Almacene este dataframe como "llegadas_wide".
+
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+#| warning: FALSE
+#| message: FALSE
+llegadas_wide <- emat %>% 
+  group_by(anio, region) %>% 
+  summarise(suma_llegadas = sum(total_llegadas_exp, na.rm = TRUE)) %>% 
+  pivot_wider(names_from = anio, 
+              values_from = suma_llegadas, 
+              names_prefix = "llegadas_")
+
+llegadas_wide
+
+```
+
+## Ejercicio 4
+
+Haga un `left_join()` usando "pernoctaciones_wide" y "llegadas_wide" usando como variable llave "region".
+
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+#| warning: FALSE
+#| message: FALSE
+pernoctaciones_wide %>% 
+  left_join(llegadas_wide, by = "region")
+
+```
+
+## Ejercicio 5
+
+- Filtre el dataframe "emat" donde el año sea igual al 2018. 
+- Luego, agrupe el dataframe por la variable "region" y calcule la suma de llegadas expandidas usando el comando `summarise(suma_llegadas = sum(total_llegadas_exp))`.  
+- Finalmente, genere un gráfico de barras mapeando en el eje x la suma de llegadas y en el eje y las regiones.
+
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+#| warning: FALSE
+#| message: FALSE
+library(ggplot2)
+
+emat %>% 
+  filter(anio == 2018) %>% 
+  group_by(region) %>% 
+  summarise(suma_llegadas = sum(total_llegadas_exp)) %>% 
+  ggplot() +
+  aes(x = suma_llegadas, y = region) +
+  geom_bar(stat = "identity")
+
+```
+
+## Ejercicio 6
+
+- Utilizando el dataframe "emat" y la función mutate() convierta la variable "anio" a tipo factor, usando el comando `mutate(anio = as.factor(anio))`.
+- Luego filtre por las filas donde la clase sea distinto a NA, usando el comando `filter(!is.na(clase))`. 
+- Agrupe por "clase" y "anio", y usando `summarise()` calcule la suma del total de pernoctaciones expandido. Llame a esta variable "suma_pernoctaciones". 
+- Genere un gráfico de barras mapeando en el eje x "clase" y en el eje y "suma_pernoctaciones".
+- El color de cada barra debe corresponder al año y las barras deben quedar una al lado de la otra.
+- Agregue títulos a los ejes y al gráfico.
+
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+#| warning: FALSE
+#| message: FALSE
+emat %>% 
+  mutate(anio = as.factor(anio)) %>% 
+  filter(!is.na(clase)) %>% 
+  group_by(clase, anio) %>% 
+  summarise(suma_pernoctaciones = sum(total_pernoctaciones_exp)) %>% 
+  ggplot() +
+  aes(x = clase, y = suma_pernoctaciones, fill = anio) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Clase", y = "Total pernoctaciones", title = "Total pernoctaciones por clase y año")
+
+```
+
+## Ejercicio 7
+
+- Filtre el dataframe "emat" donde el año sea igual al 2017.
+- Genere un gráfico de puntos o scatterplot mapeando en el eje x "total_pernoctaciones_exp" y en el eje y "total_llegadas_exp".
+
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+#| warning: FALSE
+#| message: FALSE
+emat %>% 
+  filter(anio == 2017) %>% 
+  ggplot() +
+  aes(x = total_pernoctaciones_exp, y = total_llegadas_exp) +
+  geom_point()
+
+```
+
+## Ejercicio 8
+
+- Filtre el dataframe "emat" por las filas donde la clase sea distinto a NA, usando el comando `filter(!is.na(clase))`.
+- Agrupe por "fecha" y "clase", y calcule la suma de "total_llegadas_exp" usando `summarise()`.  Llame a esta variable "suma_llegadas". 
+- Genere un gráfico de líneas mapeando en el eje x "fecha" y en el eje y "suma_llegadas". Adicionalmente, agregue el parámetro color para que cada línea tenga un color distinto según la clase.
+
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+#| warning: FALSE
+#| message: FALSE
+emat %>% 
+  filter(!is.na(clase)) %>% 
+  group_by(fecha, clase) %>% 
+  summarise(suma_llegadas = sum(total_llegadas_exp)) %>% 
+  ggplot() +
+  aes(x = fecha, y = suma_llegadas, color = clase) +
+  geom_line(size = 1)
+
+```
